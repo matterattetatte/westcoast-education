@@ -1,0 +1,109 @@
+Table auth.users {
+  id uuid [pk, default: `gen_random_uuid()`]
+}
+
+Table profiles {
+  id uuid [ref: - auth.users.id, pk, default: `gen_random_uuid()`]
+  email varchar(255) [unique, not null]
+  full_name varchar(255)
+  phone varchar(50)
+  role enum('student', 'teacher', 'admin') [default: `'student'`]
+  billing_address text
+  created_at timestamptz [default: `now()`]
+  updated_at timestamptz
+
+  Note: 'Core user accounts (students = elever, teachers = lärare, admins). Use Supabase Auth for login/email verification.'
+}
+
+Table courses {
+  id uuid [pk, default: `gen_random_uuid()`]
+  title varchar(255) [not null]
+  course_number varchar(50) [unique]
+  description text
+  duration_days int // for live courses
+  type enum('live_classroom', 'live_online', 'on_demand') [not null]
+  price decimal(10,2) // 0 for free, or subscription tier later
+  image_url text // course representative image
+  average_rating decimal(3,2) [default: 0]
+  rating_count int [default: 0]
+  created_at timestamptz [default: `now()`]
+  updated_at timestamptz
+
+  Note: 'Central course entity. Live = scheduled sessions; on_demand = recorded/previewable.'
+}
+
+Table course_sessions {
+  id uuid [pk, default: `gen_random_uuid()`]
+  course_id uuid [ref: > courses.id, not null]
+  start_date date [not null]
+  end_date date
+  location varchar(255) // classroom address or 'online'
+  teacher_id uuid [ref: > profiles.id]
+  min_participants int [default: 5]
+  status enum('planned', 'active', 'cancelled', 'completed') [default: `'planned'`]
+  cancellation_reason text
+  cancelled_at timestamptz
+
+  Note: 'Individual instances/schedules for live courses. Allows multiple runs of same course.'
+}
+
+Table enrollments {
+  id uuid [pk, default: `gen_random_uuid()`]
+  user_id uuid [ref: > profiles.id, not null]
+  course_session_id uuid [ref: > course_sessions.id] // for live
+  course_id uuid [ref: > courses.id] // for on-demand fallback/reference
+  enrolled_at timestamptz [default: `now()`]
+  status enum('confirmed', 'pending', 'cancelled', 'attended')
+  payment_status enum('pending', 'paid', 'refunded')
+  is_subscription boolean [default: false] // future flag for subscription access
+
+  Note: 'Bookings for live sessions + purchases/access for on-demand. History for recommendations.'
+}
+
+Table purchases {
+  id uuid [pk, default: `gen_random_uuid()`]
+  user_id uuid [ref: > profiles.id, not null]
+  course_id uuid [ref: > courses.id]
+  purchased_at timestamptz [default: `now()`]
+  price_paid decimal(10,2)
+  is_subscription boolean [default: false]
+  subscription_start timestamptz
+  subscription_end timestamptz
+
+  Note: 'Dedicated purchases for on-demand courses (single or subscription). Track access rights.'
+}
+
+Table course_questions {
+  id uuid [pk, default: `gen_random_uuid()`]
+  course_id uuid [ref: > courses.id, not null]
+  user_id uuid [ref: > profiles.id, not null]
+  question_text text [not null]
+  answer_text text
+  answered_by uuid [ref: > profiles.id] // usually teacher
+  created_at timestamptz [default: `now()`]
+  answered_at timestamptz
+
+  Note: 'Q&A per course – students ask, teachers reply (chat-like foundation).'
+}
+
+Table course_reviews {
+  id uuid [pk, default: `gen_random_uuid()`]
+  course_id uuid [ref: > courses.id, not null]
+  user_id uuid [ref: > profiles.id, not null]
+  rating int [note: '1-5']
+  review_text text
+  created_at timestamptz [default: `now()`]
+
+  Note: 'Reviews/ratings to compute average_rating on courses.'
+}
+
+Table subscriptions {
+  id uuid [pk, default: `gen_random_uuid()`]
+  user_id uuid [ref: > profiles.id, not null]
+  start_date date [not null]
+  end_date date
+  status enum('active', 'cancelled', 'expired')
+  created_at timestamptz [default: `now()`]
+
+  Note: 'All-access subscription. Grants access to all on_demand courses during period.'
+}
