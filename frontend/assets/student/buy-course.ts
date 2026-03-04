@@ -15,6 +15,13 @@ import { client } from '../db.js'
 
   const [course] = await client.from('courses').select().eq('id', courseId as string)
 
+  function setInputValue(id: string, value: string | undefined | null) {
+    const el = document.getElementById(id);
+    if (el instanceof HTMLInputElement) {
+        el.value = value || '';
+    }
+  }
+
   async function loadCourseAndUser() {
     try {
       // Ladda kurs
@@ -36,10 +43,10 @@ import { client } from '../db.js'
       if (userId) {
         const [profile] = await client.from('profiles').select().eq('id', userId)
         if (profile) {
-          (document.getElementById('customer-name')   as HTMLInputElement).value = profile.full_name    || '';
-          (document.getElementById('customer-email')  as HTMLInputElement).value = profile.email       || '';
-          (document.getElementById('customer-address')as HTMLInputElement).value = profile.billing_address || '';
-          (document.getElementById('customer-phone')  as HTMLInputElement).value = profile.phone       || '';
+          setInputValue('customer-name',    profile.full_name);
+          setInputValue('customer-email',   profile.email);
+          setInputValue('customer-address', profile.billing_address);
+          setInputValue('customer-phone',   profile.phone);
         }
       }
 

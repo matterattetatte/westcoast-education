@@ -20,6 +20,12 @@ import { client } from '../db.js';
         document.body.innerHTML = '<div class="error-message">❌ Ingen typ vald</div>';
     }
     const [course] = yield client.from('courses').select().eq('id', courseId);
+    function setInputValue(id, value) {
+        const el = document.getElementById(id);
+        if (el instanceof HTMLInputElement) {
+            el.value = value || '';
+        }
+    }
     function loadCourseAndUser() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -40,10 +46,10 @@ import { client } from '../db.js';
                 if (userId) {
                     const [profile] = yield client.from('profiles').select().eq('id', userId);
                     if (profile) {
-                        document.getElementById('customer-name').value = profile.full_name || '';
-                        document.getElementById('customer-email').value = profile.email || '';
-                        document.getElementById('customer-address').value = profile.billing_address || '';
-                        document.getElementById('customer-phone').value = profile.phone || '';
+                        setInputValue('customer-name', profile.full_name);
+                        setInputValue('customer-email', profile.email);
+                        setInputValue('customer-address', profile.billing_address);
+                        setInputValue('customer-phone', profile.phone);
                     }
                 }
             }
