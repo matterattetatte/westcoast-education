@@ -1,6 +1,4 @@
-import { Database } from "./database.types"
-
-export const temp = 'hey'
+import { Database } from "./database.types.js"
 
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Course = Database['public']['Tables']['courses']['Row']

@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export const temp = 'hey';
 const API_BASE = 'http://localhost:3000';
 const baseUrl = API_BASE;
 function request(endpoint_1) {

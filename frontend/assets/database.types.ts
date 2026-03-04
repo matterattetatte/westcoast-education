@@ -92,7 +92,7 @@ export type Database = {
       course_reviews: {
         Row: {
           course_id: string
-          created_at: string | null
+          created_at: string
           id: string
           rating: number | null
           review_text: string | null
@@ -237,8 +237,10 @@ export type Database = {
           course_session_id: string | null
           enrolled_at: string | null
           id: string
+          type: 'classroom' | 'online' | ''
           is_subscription: boolean | null
           payment_status: string | null
+          purchased_at: string
           status: string | null
           user_id: string
         }
@@ -247,6 +249,8 @@ export type Database = {
           course_session_id?: string | null
           enrolled_at?: string | null
           id?: string
+          type?: 'classroom' | 'online' | ''
+          purchased_at: string
           is_subscription?: boolean | null
           payment_status?: string | null
           status?: string | null
@@ -257,8 +261,10 @@ export type Database = {
           course_session_id?: string | null
           enrolled_at?: string | null
           id?: string
+          type: 'classroom' | 'online' | ''
           is_subscription?: boolean | null
           payment_status?: string | null
+          purchased_at?: string
           status?: string | null
           user_id?: string
         }
@@ -301,6 +307,7 @@ export type Database = {
           billing_address?: string | null
           created_at?: string | null
           email: string
+          password: string
           full_name?: string | null
           id: string
           phone?: string | null
@@ -311,6 +318,7 @@ export type Database = {
           created_at?: string | null
           email?: string
           full_name?: string | null
+          password?: string
           id?: string
           phone?: string | null
           role?: string | null
