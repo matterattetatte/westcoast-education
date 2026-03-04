@@ -1,13 +1,11 @@
 import { client, Course } from '../../assets/db.js';
 import { createStars } from '../common.js';
 
-let allCourses = [];
-
 async function loadCourses() {
     const courses = await client.from('courses').select().execute();
     const reviews = await client.from('course_reviews').select().execute();
 
-    allCourses = courses.map(course => {
+    const allCourses = courses.map(course => {
         const courseReviews = reviews.filter(r => r.course_id === course.id);
         const reviewCount = courseReviews.length;
         const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4;

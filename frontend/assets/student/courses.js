@@ -9,12 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { client } from '../../assets/db.js';
 import { createStars } from '../common.js';
-let allCourses = [];
 function loadCourses() {
     return __awaiter(this, void 0, void 0, function* () {
         const courses = yield client.from('courses').select().execute();
         const reviews = yield client.from('course_reviews').select().execute();
-        allCourses = courses.map(course => {
+        const allCourses = courses.map(course => {
             const courseReviews = reviews.filter(r => r.course_id === course.id);
             const reviewCount = courseReviews.length;
             const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4;

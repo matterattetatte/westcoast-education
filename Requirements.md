@@ -49,13 +49,10 @@ modernt sätt.
 ✅• E-postadress
 ✅• Mobilnummer
 
-// we can fetch and prefill data in form to allow modifications...
+✅ we can fetch and prefill data in form to allow modifications...
 
 
-
-
-
-// maybe refactor first all in to separate ts / js files.... then continue for admins!
+✅ maybe refactor first all in to separate ts / js files.... then continue for admins!
 
 Steg 2.
 

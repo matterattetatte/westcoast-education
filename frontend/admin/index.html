@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrera Kurser</title>
+  <link rel="stylesheet" href="../assets/index.css" />
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <h1>🛠️ Administrera Kurser</h1>
+      <p>Hantera hela kurskatalogen – lägg till, redigera och ta bort kurser.</p>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <!-- New course button -->
+      <div style="margin-bottom: 2rem; text-align: right;">
+        <a href="./new-course.html" class="btn btn--primary">
+          ➕ Lägg till ny kurs
+        </a>
+      </div>
+
+      <div class="courses-grid" id="courses-grid">
+        <div class="loading">Laddar kurser...</div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../assets/admin/index.js"></script>
+</body>
+</html>
