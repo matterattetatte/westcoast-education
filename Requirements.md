@@ -21,9 +21,9 @@ Så vi ser följande scenarier som systemet måste klara.
 
 ⏳ Steg 1.
 Framtagning av ”Proof Of Concept”
-⏳ I detta första steg behöver vi applikation som presenterar våra kurser på ett attraktivt och
+✅ I detta första steg behöver vi applikation som presenterar våra kurser på ett attraktivt och
 modernt sätt. 
-⏳ Vi vill dessutom ha en sida där aktuella och populära kurser presenteras.
+✅ Vi vill dessutom ha en sida där aktuella och populära kurser presenteras.
 
 // ok, so first a landing page
 // then, a list of courses... we filter by most recent + popular!

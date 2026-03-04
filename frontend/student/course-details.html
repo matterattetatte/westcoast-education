@@ -1,147 +1,149 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kursdetaljer</title>
-    <link rel="stylesheet" href="../assets/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kursdetaljer</title>
+  <link rel="stylesheet" href="../assets/index.css" />
 </head>
 <body>
-    <div class="hero">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="./courses.html" style="color: white; font-size: 1.2rem;">← Tillbaka</a>
-            <h1 id="course-title" style="margin: 0;">Laddar kurs...</h1>
-        </div>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-nav">
+        <a href="./courses.html" class="back-link">← Tillbaka</a>
+        <h1 id="course-title" class="hero-title">Laddar kurs...</h1>
+      </div>
     </div>
+  </header>
 
-    <div class="section">
-        <div class="course-detail-grid" id="course-detail">
-            <div class="loading" style="grid-column: 1/-1;">Laddar kursdetaljer...</div>
-        </div>
+  <main class="section">
+    <div class="course-detail-grid container" id="course-detail">
+      <div class="loading">Laddar kursdetaljer...</div>
     </div>
+  </main>
 
-    <script type="module">
-        import { client } from '../assets/db.js'
+  <script type="module">
+    import { client } from '../assets/db.js'
 
-        // Hämta course ID från URL
-        const urlParams = new URLSearchParams(window.location.search)
-        const courseId = urlParams.get('id')
-        
-        if (!courseId) {
-            document.querySelector('.loading').innerHTML = '❌ Ingen kurs vald'
-            throw new Error('No course ID')
+    const urlParams = new URLSearchParams(window.location.search)
+    const courseId = urlParams.get('id')
+
+    if (!courseId) {
+      document.querySelector('.loading').innerHTML = '❌ Ingen kurs vald'
+    }
+
+    async function loadCourseDetails() {
+      try {
+        const courses = await client.from('courses').select().execute()
+        const reviews = await client.from('course_reviews').select().execute()
+
+        const course = courses?.find(c => c.id === courseId)
+        if (!course) {
+          document.querySelector('.loading').innerHTML = '❌ Kurs hittades inte'
+          return
         }
 
-        async function loadCourseDetails() {
-            try {
-                const courses = await client.from('courses').select().execute()
-                const reviews = await client.from('course_reviews').select().execute()
-                
-                const course = courses.find(c => c.id === courseId)
-                if (!course) {
-                    document.querySelector('.loading').innerHTML = '❌ Kurs hittades inte'
-                    return
-                }
-                
-                // Hämta alla reviews för denna kurs
-                const courseReviews = reviews.filter(r => r.course_id === courseId)
-                const avgRating = course.average_rating || courseReviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(courseReviews.length, 1)
-                
-                document.getElementById('course-title').textContent = course.title
-                renderCourseDetails(course, courseReviews, avgRating)
-                
-            } catch (error) {
-                console.error('Error:', error)
-                document.querySelector('.loading').textContent = 'Kunde inte ladda kurs 😅'
-            }
-        }
+        const courseReviews = reviews?.filter(r => r.course_id === courseId) ?? []
+        const avgRating = course.average_rating || 
+          (courseReviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(courseReviews.length, 1)) || 0
 
-        function renderCourseDetails(course, reviews, avgRating) {
-            const detailGrid = document.getElementById('course-detail')
-            
-            detailGrid.innerHTML = `
-                <div class="course-main-image">
-                    <img src="${course.image_url || `https://via.placeholder.com/800x500/667eea/ffffff?text=${encodeURIComponent(course.title)}`}" 
-                         alt="${course.title}" class="main-course-image">
-                    <div class="course-badge">
-                        <div class="stars" style="gap: 0.2rem;">
-                            ${[...Array(5)].map((_, i) => 
-                                `<svg class="star" viewBox="0 0 20 20" fill="${i < Math.floor(avgRating) ? '#fbbf24' : '#e2e8f0'}">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>`
-                            ).join('')}
-                        </div>
-                        <span>${avgRating.toFixed(1)} (${reviews.length} recensioner)</span>
-                    </div>
-                </div>
-                
-                <div class="course-info-main">
-                    <div class="course-header">
-                        <h1 class="course-title-large">${course.title}</h1>
-                        <div class="course-number">Kursnummer: ${course.course_number || 'N/A'}</div>
-                    </div>
-                    
-                    <div class="course-details-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">📅 Längd</span>
-                            <span class="detail-value">${course.duration_days || '?'} dagar</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">💰 Pris</span>
-                            <span class="detail-value">${course.price || 0} kr</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">📍 Typ</span>
-                            <span class="detail-value">${course.type === 'classroom' ? 'Klassrum' : course.type === 'online' ? 'Distans' : 'Båda'}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="booking-section">
-                        <h3>🗓️ Nästa starter</h3>
-                        <p class="next-start">2026-04-15 (Stockholm) • 2026-05-10 (Online)</p>
-                        
-                        <div class="booking-buttons">
-                            <a href="./buy-course.html?id=${courseId}&type=classroom" class="book-btn classroom-btn">
-                                🏫 Klassrum - ${course.price || 0} kr
-                            </a>
-                            <a href="./buy-course.html?id=${courseId}&type=distance" class="book-btn online-btn" data-type="online">
-                                💻 Distans - ${course.price || 0} kr
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="course-description-full">
-                    <h3>📖 Om kursen</h3>
-                    <p>${course.description || 'Detta är en fantastisk kurs som ger dig alla verktyg du behöver för att lyckas.'}</p>
-                </div>
-                
-                ${reviews.length ? `
-                    <div class="reviews-section-full">
-                        <h3>💬 Recensioner (${reviews.length})</h3>
-                        <div class="reviews-list">
-                            ${reviews.slice(0, 5).map(review => `
-                                <div class="review-detail">
-                                    <div class="review-header">
-                                        <div class="review-stars-large">
-                                            ${[...Array(5)].map((_, i) => 
-                                                `<svg class="review-star" viewBox="0 0 20 20" fill="${i < (review.rating || 0) ? '#fbbf24' : '#e2e8f0'}">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                                </svg>`
-                                            ).join('')}
-                                        </div>
-                                    </div>
-                                    <p class="review-text-full">${review.review_text || 'Ingen kommentar'}</p>
-                                    <small>${new Date(review.created_at).toLocaleDateString('sv-SE')}</small>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                ` : ''}
-            `
-        }
+        document.getElementById('course-title').textContent = course.title
+        renderCourseDetails(course, courseReviews, avgRating)
 
-        loadCourseDetails()
-    </script>
+      } catch (error) {
+        console.error('Error:', error)
+        document.querySelector('.loading').textContent = 'Kunde inte ladda kurs 😅'
+      }
+    }
+
+    function renderCourseDetails(course, reviews, avgRating) {
+      const container = document.getElementById('course-detail')
+      const typeLabel = course.type === 'classroom' ? 'Klassrum' :
+                        course.type === 'online'    ? 'Distans'    : 'Både IRL och Online'
+
+      container.innerHTML = `
+        <article class="course-detail-card glass-card">
+
+          <div class="course-media">
+            <img 
+              src="${course.image_url || `https://dummyimage.com/800x500/4f46e5/e0e7ff?text=${encodeURIComponent(course.title)}`}" 
+              alt="${course.title}" 
+              class="course-image"
+            />
+            <div class="course-type-badge">${typeLabel}</div>
+          </div>
+
+          <div class="course-body">
+
+            <div class="course-header">
+              <h1 class="course-title">${course.title}</h1>
+              <div class="course-meta">
+                <div class="rating">
+                  <div class="stars">${createStars(avgRating)}</div>
+                  <span class="rating-text">${avgRating.toFixed(1)} (${reviews.length})</span>
+                </div>
+                <div class="duration">${course.duration_days || '?'} dagar</div>
+              </div>
+            </div>
+
+            <div class="course-price">${course.price || 0} kr</div>
+
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-label">Kursnummer</span>
+                <span class="detail-value">${course.course_number || '–'}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Typ</span>
+                <span class="detail-value">${typeLabel}</span>
+              </div>
+            </div>
+
+            <div class="booking-section">
+              <a href="./buy-course.html?id=${courseId}&type=classroom" class="btn btn--primary btn--block">
+                🏫 Boka Klassrum
+              </a>
+              <a href="./buy-course.html?id=${courseId}&type=distance" class="btn btn--primary btn--block">
+                💻 Boka Distans
+              </a>
+            </div>
+
+            <div class="course-description">
+              <h3>Om kursen</h3>
+              <p>${course.description || 'Ingen beskrivning tillgänglig.'}</p>
+            </div>
+
+            ${reviews.length ? `
+              <div class="reviews-section">
+                <h3>Recensioner (${reviews.length})</h3>
+                <div class="reviews-list">
+                  ${reviews.slice(0, 5).map(r => `
+                    <div class="review-item">
+                      <div class="rating">
+                        <div class="stars">${createStars(r.rating || 0)}</div>
+                      </div>
+                      <p class="review-text">${r.review_text || 'Ingen kommentar'}</p>
+                      <small class="review-date">${new Date(r.created_at).toLocaleDateString('sv-SE')}</small>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </article>
+      `
+    }
+
+    // Reuse the same star function from courses page
+    function createStars(rating) {
+      return [...Array(5)].map((_, i) => `
+        <svg class="star" viewBox="0 0 20 20" fill="${i < Math.floor(rating) ? '#fbbf24' : '#e2e8f0'}">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+      `).join('')
+    }
+
+    loadCourseDetails()
+  </script>
 </body>
 </html>

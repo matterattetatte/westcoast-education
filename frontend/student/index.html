@@ -30,7 +30,7 @@
             try {
                 const reviews = await client.from('course_reviews').select().execute()
                 
-                const topReviews = (reviews).slice(0, 4)
+                const topReviews = (reviews).slice(0, 3)
                 
                 renderFeatured(topReviews)
             } catch (error) {

@@ -36,11 +36,11 @@
     },
     {
       "id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
-      "billing_address": "",
+      "billing_address": "ul. Świeradowska 47",
       "created_at": "2026-03-04T11:20:11.254Z",
-      "email": "",
-      "full_name": "",
-      "phone": "",
+      "email": "matias@devicestamp.com",
+      "full_name": "Matias Marti",
+      "phone": "+46701178451",
       "role": "student"
     }
   ],
@@ -53,7 +53,20 @@
       "duration_days": 5,
       "type": "live_online",
       "price": 1999,
-      "image_url": "https://example.com/js101.jpg",
+      "image_url": "",
+      "average_rating": 4.5,
+      "rating_count": 23,
+      "created_at": "2026-03-04T01:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440009",
+      "title": "TS Grundkurs",
+      "course_number": "JS101",
+      "description": "Lär dig TS grejor",
+      "duration_days": 5,
+      "type": "live_online",
+      "price": 50,
+      "image_url": "",
       "average_rating": 4.5,
       "rating_count": 23,
       "created_at": "2026-03-04T01:00:00Z"
