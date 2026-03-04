@@ -93,7 +93,12 @@
                   <span class="rating-text">${avgRating.toFixed(1)} (${course.rating_count})</span>
                 </div>
                 <div class="duration">${course.duration_days || '?'} dagar</div>
-              </div>
+                </div>
+                <div class="duration">
+                  Start ${course.start_date 
+                    ? new Date(course.start_date).toLocaleDateString('sv-SE', { dateStyle: 'long' }) 
+                    : 'Ej satt'}
+                </div>
             </div>
 
             <div class="course-price">${course.price || 0} kr</div>

@@ -195,6 +195,7 @@ export type Database = {
           created_at: string | null
           description: string | null
           duration_days: number | null
+          start_date: string | null
           id: string
           image_url: string | null
           price: number | null
