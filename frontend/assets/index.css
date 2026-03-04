@@ -302,6 +302,22 @@ body {
   gap: 0.5rem;
 }
 
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+.review-card {
+  padding: 1.5rem;
+}
+
 .stars {
   display: flex;
   gap: 0.125rem;

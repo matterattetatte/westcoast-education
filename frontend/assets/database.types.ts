@@ -201,7 +201,7 @@ export type Database = {
           price: number | null
           rating_count: number | null
           title: string
-          type: string
+          type: 'classroom' | 'online' | ''
         }
         Insert: {
           average_rating?: number | null

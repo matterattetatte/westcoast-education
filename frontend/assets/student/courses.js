@@ -1,0 +1,81 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { client } from '../../assets/db.js';
+let allCourses = [];
+function createStars(rating) {
+    return [...Array(5)].map((_, i) => `
+        <svg class="star" viewBox="0 0 20 20" fill="${i < Math.floor(rating) ? '#fbbf24' : '#e2e8f0'}">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+      `).join('');
+}
+function loadCourses() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const courses = yield client.from('courses').select().execute();
+        const reviews = yield client.from('course_reviews').select().execute();
+        allCourses = courses.map(course => {
+            const courseReviews = reviews.filter(r => r.course_id === course.id);
+            const reviewCount = courseReviews.length;
+            const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4;
+            return Object.assign(Object.assign({}, course), { popularityScore,
+                reviewCount });
+        });
+        // Sort by popularity (highest first)
+        allCourses.sort((a, b) => b.popularityScore - a.popularityScore);
+        renderCourses(allCourses.slice(0, 10));
+    });
+}
+function renderCourses(courses) {
+    const grid = document.getElementById('courses-grid');
+    const courseMapping = {
+        classroom: 'Klassrum',
+        online: 'Distans',
+        '': '', //silence ts error
+    };
+    grid.innerHTML = courses.map(course => {
+        var _a, _b;
+        const rating = course.average_rating || 0;
+        const typeLabel = courseMapping[course.type] || 'Både IRL och Online';
+        return `
+          <article class="course-card glass-card">
+            <div class="course-media">
+              <img 
+                src="https://dummyimage.com/640x360/4f46e5/e0e7ff?text=${encodeURIComponent(course.title)}" 
+                alt="${course.title}" 
+                class="course-image" 
+                loading="lazy"
+              />
+              <span class="course-type-badge">${typeLabel}</span>
+            </div>
+
+            <div class="course-body">
+              <h3 class="course-title">${course.title}</h3>
+              
+              <div class="course-price">${course.price || 0} kr</div>
+
+              <div class="course-meta">
+                <div class="rating">
+                  <div class="stars">${createStars(rating)}</div>
+                </div>
+              </div>
+
+              <p class="course-description">
+                ${((_a = course.description) === null || _a === void 0 ? void 0 : _a.substring(0, 120)) || ''}${Number((_b = course.description) === null || _b === void 0 ? void 0 : _b.length) > 120 ? '...' : ''}
+              </p>
+
+              <a href="./course-details.html?id=${course.id}" class="btn btn--primary btn--block">
+                Boka Nu
+              </a>
+            </div>
+          </article>
+        `;
+    }).join('');
+}
+loadCourses();
