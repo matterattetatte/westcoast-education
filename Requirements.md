@@ -29,31 +29,33 @@ modernt sätt.
 // then, a list of courses... we filter by most recent + popular!
 
 ✅  På sidan som presenterar detaljer om kursen vill vi att följande information finns:
-• Kurstitel
-• Kursnummer
-• Antal dagar som kursen är
-• Om den finns tillgänglig som klassrum och eller distanskurs
-• En bild som representerar kursen
-• Datum då kursen är planerad att genomföras
-• En möjlighet att boka sig för kursen via klassrum eller distans
+✅ • Kurstitel
+✅ • Kursnummer
+✅ • Antal dagar som kursen är
+✅ • Om den finns tillgänglig som klassrum och eller distanskurs
+✅• En bild som representerar kursen
+✅• Datum då kursen är planerad att genomföras
+✅• En möjlighet att boka sig för kursen via klassrum eller distans
 
 // ok so using query params for course details
 
-⏳ Vid bokning av en kurs så måste användaren/kunden logga in eller skapa ett konto.
+✅ Vid bokning av en kurs så måste användaren/kunden logga in eller skapa ett konto.
 // check if already logged in as welll... using local storage to store user id
 // ok, so a simple signup and we store the user id as it it were a jwt... heheh super safe lol
 
-⏳ På bokningssidan ska följande information anges.
-• Kundnamn
-• Faktureringsadress
-• E-postadress
-• Mobilnummer
+✅ På bokningssidan ska följande information anges.
+✅ • Kundnamn
+✅• Faktureringsadress
+✅• E-postadress
+✅• Mobilnummer
 
 // we can fetch and prefill data in form to allow modifications...
 
 
 
 
+
+// maybe refactor first all in to separate ts / js files.... then continue for admins!
 
 Steg 2.
 
