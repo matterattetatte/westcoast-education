@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boka Kurs</title>
+    <link rel="stylesheet" href="../assets/index.css">
+</head>
+<body>
+    <div class="hero">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="./courses.html" style="color: white; font-size: 1.2rem;">← Tillbaka</a>
+            <h1 id="course-title">Laddar kurs...</h1>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="booking-page-container">
+            <div class="course-summary">
+                <h2>📚 Du bokar: <span id="course-name">...</span></h2>
+                <div class="course-meta">
+                    <span id="course-type">...</span> • 
+                    <span id="course-price">0 kr</span>
+                </div>
+            </div>
+
+            <form id="booking-form" class="booking-form">
+                <h3>📋 Kunduppgifter</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kundnamn *</label>
+                        <input type="text" id="customer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-postadress *</label>
+                        <input type="email" id="customer-email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>Faktureringsadress *</label>
+                        <textarea id="customer-address" rows="3" required placeholder="Gata, stad, postnummer"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Mobilnummer</label>
+                        <input type="tel" id="customer-phone" placeholder="08-123 45 67">
+                    </div>
+                    <div class="form-group">
+                        <label>Kursformat</label>
+                        <input type="text" id="course-format" readonly>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="secondary-btn">← Tillbaka</button>
+                    <button type="submit" class="book-btn primary-btn">
+                        💳 Betala & Bekräfta Bokning
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { client } from '../assets/db.js'
+
+        // Hämta URL params
+        const urlParams = new URLSearchParams(window.location.search)
+        const courseId = urlParams.get('id')
+        const type = urlParams.get('type') === 'distance' ? 'online' : 'classroom'
+
+        if (!courseId) {
+            document.body.innerHTML = '<h2 style="text-align:center;color:white;padding:4rem">❌ Ingen kurs vald</h2>'
+            throw new Error('No course ID')
+        }
+
+        // Check existing user
+        async function getOrCreateUser(customerData) {
+            let userId = localStorage.getItem('userId')
+            
+            if (userId) {
+                try {
+                    const { data: user } = await client
+                        .from('users')
+                        .select()
+                        .eq('id', userId)
+                        .single()
+                    return { id: userId, ...user }
+                } catch (e) {
+                    localStorage.removeItem('userId')
+                }
+            }
+
+            // Create new user
+            const newUserId = crypto.randomUUID()
+            const user = {
+                id: newUserId,
+                name: customerData.name,
+                email: customerData.email,
+                phone: customerData.phone || null,
+                address: customerData.address,
+                created_at: new Date().toISOString()
+            }
+
+            await client.from('users').insert(user)
+            localStorage.setItem('userId', newUserId)
+            return user
+        }
+
+        async function loadCourse() {
+            try {
+                const courses = await client.from('courses').select().execute()
+                const course = courses.find(c => c.id === courseId)
+                
+                if (!course) {
+                    document.body.innerHTML = '<h2 style="text-align:center;color:white;padding:4rem">❌ Kurs hittades inte</h2>'
+                    return
+                }
+
+                // Populate course info
+                document.getElementById('course-name').textContent = course.title
+                document.getElementById('course-type').textContent = type === 'classroom' ? 'Klassrum' : 'Distans'
+                document.getElementById('course-price').textContent = `${course.price || 0} kr`
+                document.getElementById('course-format').value = type === 'classroom' ? 'Klassrum' : 'Distans'
+                document.getElementById('course-title').textContent = `Boka: ${course.title}`
+
+                // Prepopulate form if user exists
+                const userId = localStorage.getItem('userId')
+                if (userId) {
+                    try {
+                        const { data: user } = await client
+                            .from('users')
+                            .select()
+                            .eq('id', userId)
+                            .single()
+                        
+                        if (user) {
+                            document.getElementById('customer-name').value = user.name || ''
+                            document.getElementById('customer-email').value = user.email || ''
+                            document.getElementById('customer-address').value = user.address || ''
+                            document.getElementById('customer-phone').value = user.phone || ''
+                        }
+                    } catch (e) {
+                        console.log('Could not load user data')
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error:', error)
+                document.querySelector('.section').innerHTML = '<div style="text-align:center;padding:4rem;color:white">Kunde inte ladda kursdata 😅</div>'
+            }
+        }
+
+        // Form submission
+        document.getElementById('booking-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            
+            const customerData = {
+                name: document.getElementById('customer-name').value,
+                email: document.getElementById('customer-email').value,
+                address: document.getElementById('customer-address').value,
+                phone: document.getElementById('customer-phone').value
+            }
+
+            try {
+                // 1. Get or create user
+                const user = await getOrCreateUser(customerData)
+                
+                // 2. Create purchase
+                const purchaseId = crypto.randomUUID()
+                await client.from('purchases').insert({
+                    id: purchaseId,
+                    course_id: courseId,
+                    price_paid: currentCourse?.price || 0,
+                    purchased_at: new Date().toISOString(),
+                    user_id: user.id
+                })
+
+                // 3. Create enrollment
+                const enrollmentId = crypto.randomUUID()
+                await client.from('enrollments').insert({
+                    id: enrollmentId,
+                    course_id: courseId,
+                    price_paid: currentCourse?.price || 0,
+                    purchased_at: new Date().toISOString(),
+                    type: type,
+                    payment_status: 'paid',
+                    user_id: user.id
+                })
+
+                alert(`🎉 Tack ${customerData.name}! Din bokning för "${document.getElementById('course-name').textContent}" är bekräftad!`)
+                window.location.href = './courses.html?success=true'
+                
+            } catch (error) {
+                console.error('Booking error:', error)
+                alert('❌ Något gick fel med bokningen. Försök igen!')
+            }
+        })
+
+        loadCourse()
+    </script>
+</body>
+</html>

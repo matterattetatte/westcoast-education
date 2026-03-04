@@ -101,12 +101,12 @@
                         <p class="next-start">2026-04-15 (Stockholm) • 2026-05-10 (Online)</p>
                         
                         <div class="booking-buttons">
-                            <button class="book-btn classroom-btn" data-type="classroom">
+                            <a href="./buy-course.html?id=${courseId}&type=classroom" class="book-btn classroom-btn">
                                 🏫 Klassrum - ${course.price || 0} kr
-                            </button>
-                            <button class="book-btn online-btn" data-type="online">
+                            </a>
+                            <a href="./buy-course.html?id=${courseId}&type=distance" class="book-btn online-btn" data-type="online">
                                 💻 Distans - ${course.price || 0} kr
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -140,43 +140,6 @@
                 ` : ''}
             `
         }
-
-        // Bokningsknappar
-        document.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('classroom-btn') || e.target.classList.contains('online-btn')) {
-                const type = e.target.dataset.type
-                const { courseTitle } = document.querySelector('.course-title-large')
-
-                const userId = localStorage.getItem('userId')
-
-                if (!userId) {
-                    console.log('temp', crypto.randomUUID())
-                    alert('TODO: SIGNUP!')
-                }
-
-                const now = new Date().toISOString()
-
-                const purchase = await client.from('purchases').insert({
-                    id: crypto.randomUUID(),
-                    course_id: courseId,
-                    price_paid: 'TODO:FIX',
-                    purchased_at: now,
-                    user_id: userId,
-                }).select()
-
-                const enrollment = await client.from('enrollments').insert({
-                    id: crypto.randomUUID(),
-                    course_id: courseId,
-                    price_paid: 'TODO:FIX',
-                    purchased_at: now,
-                    type: 'classroom', //tood: fix based on click
-                    payment_status: 'paid',
-                    user_id: userId,
-                }).select()
-                
-                alert(`🎉 Tack! Du har bokat ${type === 'classroom' ? 'klassrum' : 'distans'} för "${courseTitle}"!\n\n(Fungerar när betalning är integrerad)`)
-            }
-        })
 
         loadCourseDetails()
     </script>
