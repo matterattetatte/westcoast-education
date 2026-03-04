@@ -20,10 +20,18 @@ import { client } from '../db.js';
         document.body.innerHTML = '<div class="error-message">❌ Ingen typ vald</div>';
     }
     const [course] = yield client.from('courses').select().eq('id', courseId);
-    function setInputValue(id, value) {
+    function setText(id, value) {
         const el = document.getElementById(id);
-        if (el instanceof HTMLInputElement) {
-            el.value = value || '';
+        if (!el) {
+            console.warn(`Element with id "${id}" not found`);
+            return;
+        }
+        const text = value == null ? '' : String(value);
+        if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+            el.value = text;
+        }
+        else {
+            el.textContent = text;
         }
     }
     function loadCourseAndUser() {
@@ -37,19 +45,18 @@ import { client } from '../db.js';
                     alert('Redan inbokad!');
                     return window.history.back();
                 }
-                // Uppdatera UI
-                document.getElementById('course-title').textContent = `Boka: ${course.title}`;
-                document.getElementById('course-name').textContent = course.title;
-                document.getElementById('course-type').textContent = formatType === 'classroom' ? 'Klassrum' : 'Distans';
-                document.getElementById('course-price').textContent = `${course.price || 0} kr`;
-                document.getElementById('course-format').value = formatType === 'classroom' ? 'Klassrum' : 'Distans';
+                setText('course-title', `Boka: ${course.title}`);
+                setText('course-name', course.title);
+                setText('course-type', formatType === 'classroom' ? 'Klassrum' : 'Distans');
+                setText('course-price', `${course.price || 0} kr`);
+                setText('course-format', formatType === 'classroom' ? 'Klassrum' : 'Distans');
                 if (userId) {
                     const [profile] = yield client.from('profiles').select().eq('id', userId);
                     if (profile) {
-                        setInputValue('customer-name', profile.full_name);
-                        setInputValue('customer-email', profile.email);
-                        setInputValue('customer-address', profile.billing_address);
-                        setInputValue('customer-phone', profile.phone);
+                        setText('customer-name', profile.full_name);
+                        setText('customer-email', profile.email);
+                        setText('customer-address', profile.billing_address);
+                        setText('customer-phone', profile.phone);
                     }
                 }
             }
@@ -76,7 +83,6 @@ import { client } from '../db.js';
             }
             try {
                 let userId = localStorage.getItem('userId') || '';
-                // Uppdatera eller skapa profil
                 if (userId) {
                     yield client.from('profiles').update(customer).eq('id', userId);
                 }
@@ -100,7 +106,6 @@ import { client } from '../db.js';
                     localStorage.setItem('userId', userId);
                 }
                 const now = new Date().toISOString();
-                // Skapa köp & enrollment
                 const purchaseId = crypto.randomUUID();
                 yield client.from('purchases').insert({
                     id: purchaseId,
@@ -127,9 +132,7 @@ import { client } from '../db.js';
             }
         });
     }
-    // Event listeners
     document.getElementById('booking-form').addEventListener('submit', handleBooking);
     (_a = document.getElementById('back-btn')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => history.back());
-    // Start
     loadCourseAndUser();
 }))();

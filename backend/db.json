@@ -63,6 +63,16 @@
       "password": "o",
       "role": "student",
       "created_at": "2026-03-04T13:31:54.789Z"
+    },
+    {
+      "id": "f66b7fc7-8b3e-4a3a-8de5-c5a560c7a69a",
+      "full_name": "Matias Marti",
+      "email": "matias@devicestamp.comy",
+      "billing_address": "ul. Świeradowska 47",
+      "phone": "+46701178451",
+      "password": "o",
+      "role": "student",
+      "created_at": "2026-03-04T23:24:49.742Z"
     }
   ],
   "courses": [
@@ -148,6 +158,14 @@
       "type": "classroom",
       "payment_status": "paid",
       "purchased_at": "2026-03-04T22:42:14.867Z"
+    },
+    {
+      "id": "94746582-83aa-4767-a472-15db872edd64",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "",
+      "type": "online",
+      "payment_status": "paid",
+      "purchased_at": "2026-03-04T23:24:49.751Z"
     }
   ],
   "purchases": [
@@ -206,6 +224,13 @@
       "user_id": "becf1386-5670-40a8-be38-ab241b8eda3f",
       "price_paid": 50,
       "purchased_at": "2026-03-04T22:42:14.867Z"
+    },
+    {
+      "id": "81bdee7c-8eb3-442b-9f81-d3e9bcd970b2",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "",
+      "price_paid": 1999,
+      "purchased_at": "2026-03-04T23:24:49.751Z"
     }
   ],
   "course_questions": [],
