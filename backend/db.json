@@ -1,0 +1,53 @@
+{
+  "profiles": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "email": "student1@example.com",
+      "full_name": "Anna Student",
+      "phone": "0701234567",
+      "role": "student",
+      "billing_address": null,
+      "created_at": "2026-03-04T01:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "email": "teacher1@example.com", 
+      "full_name": "Erik Lärare",
+      "role": "teacher",
+      "created_at": "2026-03-04T01:00:00Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440002",
+      "title": "JavaScript Grundkurs",
+      "course_number": "JS101",
+      "description": "Lär dig Vanilla JS från grunden",
+      "duration_days": 5,
+      "type": "live_online",
+      "price": 1999.00,
+      "image_url": "https://example.com/js101.jpg",
+      "average_rating": 4.5,
+      "rating_count": 23,
+      "created_at": "2026-03-04T01:00:00Z"
+    }
+  ],
+  "course_sessions": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440003",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "start_date": "2026-03-10",
+      "end_date": "2026-03-14", 
+      "location": "online",
+      "teacher_id": "550e8400-e29b-41d4-a716-446655440001",
+      "min_participants": 5,
+      "status": "planned",
+      "created_at": "2026-03-04T01:00:00Z"
+    }
+  ],
+  "enrollments": [],
+  "purchases": [],
+  "course_questions": [],
+  "course_reviews": [],
+  "subscriptions": []
+}

@@ -1,0 +1,12 @@
+
+<button>heyy</button>
+
+<script type="module">
+    import {temp, client } from '../assets/db.js'
+    console.log(temp)
+
+    const data = await client.from('profiles').select().eq('id', '550e8400-e29b-41d4-a716-446655440000')
+
+    console.log('temp', data)
+</script>
+
