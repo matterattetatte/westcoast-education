@@ -18,7 +18,7 @@ Table courses {
   course_number varchar(50) [unique]
   description text
   duration_days int
-  type enum('live_classroom', 'live_online') [not null]
+  type enum('classroom', 'online') [not null]
   price decimal(10,2) [default: 0]
   image_url text
   average_rating decimal(3,2) [default: 0]
