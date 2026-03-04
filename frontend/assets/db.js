@@ -23,8 +23,10 @@ export class JsonServerClient {
     from(table) {
         return {
             select: () => ({
-                eq: (field, value) => {
-                    return request(`${table}?${field}=${value}`);
+                eq(field, value) {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        return request(`${table}?${field}=${value}`);
+                    });
                 },
                 execute() {
                     return __awaiter(this, void 0, void 0, function* () {
@@ -37,9 +39,9 @@ export class JsonServerClient {
                     return __awaiter(this, void 0, void 0, function* () {
                         const result = yield request(table, {
                             method: 'POST',
-                            body: JSON.stringify(Array.isArray(data) ? data : [data])
+                            body: JSON.stringify(data)
                         });
-                        return { data: Array.isArray(result) ? result : [result] };
+                        return { data: result };
                     });
                 }
             }),

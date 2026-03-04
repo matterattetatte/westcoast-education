@@ -38,7 +38,7 @@ export class JsonServerClient {
     from<T extends TableName>(table: T) {
         return {
             select: () => ({
-                eq: (field: string, value: string | number) => {
+                async eq(field: string, value: string | number) {
                     return request<ExtractRow<T>[]>(
                             `${table}?${field}=${value}`
                         )
@@ -53,9 +53,9 @@ export class JsonServerClient {
                 async select(): Promise<{ data: ExtractRow<T>[] }> {
                     const result = await request(table, {
                         method: 'POST',
-                        body: JSON.stringify(Array.isArray(data) ? data : [data])
+                        body: JSON.stringify(data)
                     })
-                    return { data: Array.isArray(result) ? result : [result] }
+                    return { data: result }
                 }
             }),
 

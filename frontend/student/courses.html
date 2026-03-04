@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alla Kurser</title>
+    <link rel="stylesheet" href="../assets/index.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>📚 Alla Våra Kurser</h1>
+        <p>Upptäck hela vårt utbud av populära och aktuella kurser, sorterade efter popularitet.</p>
+    </div>
+
+    <div class="section">
+        <div class="filters" style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            <button class="filter-btn active" data-sort="popularity">🌟 Populära</button>
+            <button class="filter-btn" data-sort="newest">Senaste</button>
+        </div>
+        
+        <div class="courses-grid" id="courses-grid">
+            <div class="loading">Laddar kurser...</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { client } from '../assets/db.js'
+
+        let allCourses = []
+
+        async function loadCourses() {
+            try {
+                const courses = await client.from('courses').select().execute()
+                const reviews = await client.from('course_reviews').select().execute()
+                
+                // Beräkna popularity score: (rating_count * 0.6 + review count * 0.4)
+                allCourses = courses.map(course => {
+                    const courseReviews = reviews.filter(r => r.course_id === course.id)
+                    const reviewCount = courseReviews.length
+                    const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4
+                    
+                    return {
+                        ...course,
+                        popularityScore,
+                        reviewCount,
+                        reviews: courseReviews.slice(0, 2)
+                    }
+                })
+                
+                // Sortera efter popularity som default
+                allCourses.sort((a, b) => b.popularityScore - a.popularityScore)
+                renderCourses(allCourses)
+            } catch (error) {
+                console.error('Error:', error)
+                document.querySelector('.loading').textContent = 'Kunde inte ladda kurser 😅'
+            }
+        }
+
+        function renderCourses(courses) {
+            document.getElementById('courses-grid').innerHTML = courses.map(course => {
+                const rating = course.average_rating || 0
+                return `
+                    <div class="course-card-full">
+                        <div class="course-image-wrapper">
+                            <img src="${course.image_url || `https://via.placeholder.com/400x250/667eea/ffffff?text=${encodeURIComponent(course.title)}`}" 
+                                 alt="${course.title}" class="course-image">
+                            <div class="course-type">${course.type || 'Online'}</div>
+                        </div>
+                        
+                        <div class="course-content-full">
+                            <h3 class="course-title">${course.title}</h3>
+                            <div class="course-price-large">${course.price || 0} kr</div>
+                            
+                            <div class="course-meta-full">
+                                <div class="rating-section">
+                                    <div class="stars">
+                                        ${[...Array(5)].map((_, i) => 
+                                            `<svg class="star" viewBox="0 0 20 20" fill="${i < Math.floor(rating) ? '#fbbf24' : '#e2e8f0'}">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                            </svg>`
+                                        ).join('')}
+                                    </div>
+                                    <span>${rating.toFixed(1)} (${course.rating_count || 0})</span>
+                                </div>
+                                <div class="duration">${course.duration_days || '?'} dagar</div>
+                            </div>
+                            
+                            <p class="course-description">${course.description?.substring(0, 120) || ''}${course.description?.length > 120 ? '...' : ''}</p>
+                            
+                            <a href="./course-details.html?id=${course.id}" class="book-btn">Boka Nu</a>
+                        </div>
+                    </div>
+                `
+            }).join('')
+        }
+
+        // Filter-funktioner
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'))
+                e.target.classList.add('active')
+                
+                const sortType = e.target.dataset.sort
+                let sortedCourses = [...allCourses]
+                
+                switch(sortType) {
+                    case 'popularity':
+                        sortedCourses.sort((a, b) => b.popularityScore - a.popularityScore)
+                        break
+                    case 'newest':
+                        sortedCourses.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                        break
+                    case 'price-low':
+                        sortedCourses.sort((a, b) => (a.price || 0) - (b.price || 0))
+                        break
+                    case 'price-high':
+                        sortedCourses.sort((a, b) => (b.price || 0) - (a.price || 0))
+                        break
+                }
+                
+                renderCourses(sortedCourses)
+            }
+        })
+
+        loadCourses()
+    </script>
+</body>
+</html>

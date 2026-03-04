@@ -11,7 +11,7 @@
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440001",
-      "email": "teacher1@example.com", 
+      "email": "teacher1@example.com",
       "full_name": "Erik Lärare",
       "role": "teacher",
       "created_at": "2026-03-04T01:00:00Z"
@@ -25,7 +25,7 @@
       "description": "Lär dig Vanilla JS från grunden",
       "duration_days": 5,
       "type": "live_online",
-      "price": 1999.00,
+      "price": 1999,
       "image_url": "https://example.com/js101.jpg",
       "average_rating": 4.5,
       "rating_count": 23,
@@ -37,7 +37,7 @@
       "id": "550e8400-e29b-41d4-a716-446655440003",
       "course_id": "550e8400-e29b-41d4-a716-446655440002",
       "start_date": "2026-03-10",
-      "end_date": "2026-03-14", 
+      "end_date": "2026-03-14",
       "location": "online",
       "teacher_id": "550e8400-e29b-41d4-a716-446655440001",
       "min_participants": 5,
@@ -46,8 +46,58 @@
     }
   ],
   "enrollments": [],
-  "purchases": [],
+  "purchases": [
+    {
+      "id": "f331d370-3cb0-4fe4-88ba-6fa5634024e2",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "price_paid": "TODO:FIX",
+      "purchased_at": "2026-03-04T10:51:23.125Z",
+      "user_id": null
+    }
+  ],
   "course_questions": [],
-  "course_reviews": [],
-  "subscriptions": []
+  "course_reviews": [
+    {
+      "id": "review-1",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "user-1",
+      "rating": 5,
+      "review_text": "Fantastisk kurs! Lärde mig allt jag behövde veta på ett superengagerande sätt. Rekommenderar starkt! ⭐⭐⭐⭐⭐",
+      "created_at": "2026-03-01T10:30:00Z"
+    },
+    {
+      "id": "review-2",
+      "course_id": "course-1",
+      "user_id": "user-2",
+      "rating": 4,
+      "review_text": "Mycket bra struktur och tydliga förklaringar. Ville ha lite mer praktiska övningar dock.",
+      "created_at": "2026-02-28T15:45:00Z"
+    },
+    {
+      "id": "review-3",
+      "course_id": "course-2",
+      "user_id": "user-3",
+      "rating": 5,
+      "review_text": "Bästa kursen jag tagit! Instruktören är en mästare på att förklara komplexa ämnen.",
+      "created_at": "2026-03-02T09:15:00Z"
+    },
+    {
+      "id": "review-4",
+      "course_id": "course-3",
+      "user_id": "user-4",
+      "rating": 5,
+      "review_text": "Life-changing! Har redan implementerat det jag lärt mig i mitt jobb.",
+      "created_at": "2026-03-03T14:20:00Z"
+    },
+    {
+      "id": "review-5",
+      "course_id": "course-2",
+      "user_id": "user-5",
+      "rating": 4,
+      "review_text": "Solid kurs med bra tempo. Materialet är top-notch!",
+      "created_at": "2026-03-01T18:30:00Z"
+    }
+  ],
+  "subscriptions": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
