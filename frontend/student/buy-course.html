@@ -89,6 +89,13 @@
     async function loadCourseAndUser() {
       try {
         // Ladda kurs
+        const userId = localStorage.getItem('userId')
+        const enrollments = await client.from('enrollments').select().eq('user_id', userId)
+        const alreadyEnrolled = enrollments.find((e) => e.course_id === courseId)
+        if (alreadyEnrolled) {
+          alert('Redan inbokad!')
+          return window.history.back()
+        }
         const [course] = await client.from('courses').select().eq('id', courseId)
 
         // Uppdatera UI
@@ -99,9 +106,8 @@
         document.getElementById('course-format').value = formatType === 'classroom' ? 'Klassrum' : 'Distans'
 
         // Förifyll användardata om den finns
-        const userId = localStorage.getItem('userId')
         if (userId) {
-          const profile = await client.from('profiles').select().eq('id', userId)
+          const [profile] = await client.from('profiles').select().eq('id', userId)
           if (profile) {
             document.getElementById('customer-name').value    = profile.full_name  || ''
             document.getElementById('customer-email').value   = profile.email      || ''
@@ -145,7 +151,7 @@
             ...customer,
             role: 'student',
             created_at: new Date().toISOString()
-          })
+          }).select()
           localStorage.setItem('userId', userId)
         }
 
@@ -157,7 +163,7 @@
           user_id: userId,
           price_paid: /* hämta från kursen eller skicka med form */ 0, // ← TODO: fixa riktigt värde
           purchased_at: new Date().toISOString()
-        })
+        }).select()
 
         const enrollmentId = crypto.randomUUID()
         await client.from('enrollments').insert({
@@ -167,7 +173,7 @@
           type: formatType,
           payment_status: 'paid',           // TODO: egentligen efter betalning
           purchased_at: new Date().toISOString()
-        })
+        }).select()
 
         alert(`Tack ${customer.full_name}! Din bokning är nu bekräftad.`)
         window.location.href = './courses.html?success=true'

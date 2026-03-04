@@ -575,7 +575,6 @@ body {
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   font-size: 1rem;
-  background: var(--clr-bg-card);
   transition: border-color 0.2s;
 }
 
