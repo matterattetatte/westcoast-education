@@ -90,6 +90,8 @@
       document.body.innerHTML = '<div class="error-message">❌ Ingen typ vald</div>'
     }
 
+    const [course] = await client.from('courses').select().eq('id', courseId)
+
     async function loadCourseAndUser() {
       try {
         // Ladda kurs
@@ -100,7 +102,6 @@
           alert('Redan inbokad!')
           return window.history.back()
         }
-        const [course] = await client.from('courses').select().eq('id', courseId)
 
         // Uppdatera UI
         document.getElementById('course-title').textContent = `Boka: ${course.title}`
@@ -149,24 +150,41 @@
         if (userId) {
           await client.from('profiles').update(customer).eq('id', userId)
         } else {
-          userId = crypto.randomUUID()
-          await client.from('profiles').insert({
-            id: userId,
-            ...customer,
-            role: 'student',
-            created_at: new Date().toISOString()
-          }).select()
+          const password = prompt('Please, provide password')
+
+          let userId = null
+          const [foundUser] = await client.from('profiles').select().eq('email', customer.email)
+
+          if (!foundUser) {
+            userId = crypto.randomUUID()
+
+            await client.from('profiles').insert({
+              id: userId,
+              ...customer,
+              password,
+              role: 'student',
+              created_at: new Date().toISOString()
+            }).select()
+          } else {
+            if (foundUser.password !== password) {
+              alert('Wrong password!')
+              return
+            }
+            userId = foundUser.id
+          }
+
           localStorage.setItem('userId', userId)
         }
 
+        const now = new Date().toISOString()
         // Skapa köp & enrollment
         const purchaseId = crypto.randomUUID()
         await client.from('purchases').insert({
           id: purchaseId,
           course_id: courseId,
           user_id: userId,
-          price_paid: /* hämta från kursen eller skicka med form */ 0, // ← TODO: fixa riktigt värde
-          purchased_at: new Date().toISOString()
+          price_paid: course.price,
+          purchased_at: now
         }).select()
 
         const enrollmentId = crypto.randomUUID()
@@ -176,7 +194,7 @@
           user_id: userId,
           type: formatType,
           payment_status: 'paid',           // TODO: egentligen efter betalning
-          purchased_at: new Date().toISOString()
+          purchased_at: now
         }).select()
 
         alert(`Tack ${customer.full_name}! Din bokning är nu bekräftad.`)

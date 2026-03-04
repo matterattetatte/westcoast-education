@@ -7,6 +7,7 @@
       "phone": "0701234567",
       "role": "student",
       "billing_address": null,
+      "password": "",
       "created_at": "2026-03-04T01:00:00Z"
     },
     {
@@ -42,6 +43,16 @@
       "full_name": "Matias Marti",
       "phone": "+46701178451",
       "role": "student"
+    },
+    {
+      "id": "21adf4f6-b4f9-416e-87e1-25c978f889db",
+      "full_name": "Matias Marti",
+      "email": "matdddias@devicestamp.com",
+      "billing_address": "ul. Świeradowska 47",
+      "phone": "+46701178451",
+      "password": "mypassword",
+      "role": "student",
+      "created_at": "2026-03-04T13:28:32.759Z"
     }
   ],
   "courses": [
@@ -95,6 +106,30 @@
       "type": "online",
       "payment_status": "paid",
       "purchased_at": "2026-03-04T12:46:20.908Z"
+    },
+    {
+      "id": "9ca59ea7-dcf9-4214-a2bf-ae8b2bf6bb6d",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
+      "type": "online",
+      "payment_status": "paid",
+      "purchased_at": "2026-03-04T13:24:38.104Z"
+    },
+    {
+      "id": "b3905a54-446e-41aa-adad-3925075a8c6b",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": null,
+      "type": "online",
+      "payment_status": "paid",
+      "purchased_at": "2026-03-04T13:28:32.771Z"
+    },
+    {
+      "id": "86f47b58-9f79-4304-a4cc-b90575be8b5f",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": null,
+      "type": "classroom",
+      "payment_status": "paid",
+      "purchased_at": "2026-03-04T13:29:43.305Z"
     }
   ],
   "purchases": [
@@ -111,6 +146,27 @@
       "user_id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
       "price_paid": 0,
       "purchased_at": "2026-03-04T12:46:20.874Z"
+    },
+    {
+      "id": "3891cd5f-95f3-4602-ae8f-f0488bf063e4",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
+      "price_paid": 1999,
+      "purchased_at": "2026-03-04T13:24:38.104Z"
+    },
+    {
+      "id": "b1700228-3b5b-45e7-8d14-19e46dd95616",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": null,
+      "price_paid": 1999,
+      "purchased_at": "2026-03-04T13:28:32.771Z"
+    },
+    {
+      "id": "a2c483f4-c522-45a3-ad1e-a1ddd839aca6",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": null,
+      "price_paid": 50,
+      "purchased_at": "2026-03-04T13:29:43.305Z"
     }
   ],
   "course_questions": [],

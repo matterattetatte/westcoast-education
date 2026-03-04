@@ -28,7 +28,7 @@ modernt sätt.
 // ok, so first a landing page
 // then, a list of courses... we filter by most recent + popular!
 
-⏳ På sidan som presenterar detaljer om kursen vill vi att följande information finns:
+✅  På sidan som presenterar detaljer om kursen vill vi att följande information finns:
 • Kurstitel
 • Kursnummer
 • Antal dagar som kursen är

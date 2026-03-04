@@ -291,6 +291,7 @@ export type Database = {
           billing_address: string | null
           created_at: string | null
           email: string
+          password: string
           full_name: string | null
           id: string
           phone: string | null
