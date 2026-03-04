@@ -15,6 +15,33 @@
       "full_name": "Erik Lärare",
       "role": "teacher",
       "created_at": "2026-03-04T01:00:00Z"
+    },
+    {
+      "id": "3fa62992-8312-489f-828c-a7a36c0754ed",
+      "billing_address": "",
+      "created_at": "2026-03-04T11:18:09.008Z",
+      "email": "",
+      "full_name": "",
+      "phone": "",
+      "role": "student"
+    },
+    {
+      "id": "418a46b1-8038-4e03-81ae-d8180b057395",
+      "billing_address": "",
+      "created_at": "2026-03-04T11:18:35.326Z",
+      "email": "",
+      "full_name": "",
+      "phone": "",
+      "role": "student"
+    },
+    {
+      "id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
+      "billing_address": "",
+      "created_at": "2026-03-04T11:20:11.254Z",
+      "email": "",
+      "full_name": "",
+      "phone": "",
+      "role": "student"
     }
   ],
   "courses": [

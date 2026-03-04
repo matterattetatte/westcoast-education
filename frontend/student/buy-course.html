@@ -79,35 +79,39 @@
             throw new Error('No course ID')
         }
 
+        const currentCourse = await client.from('courses').select().eq('id', courseId)
+
         // Check existing user
         async function getOrCreateUser(customerData) {
             let userId = localStorage.getItem('userId')
             
             if (userId) {
                 try {
-                    const { data: user } = await client
-                        .from('users')
+                    const user  = await client
+                        .from('profiles')
                         .select()
                         .eq('id', userId)
-                        .single()
                     return { id: userId, ...user }
                 } catch (e) {
                     localStorage.removeItem('userId')
                 }
             }
 
+            debugger
+            // TODO: FIX
             // Create new user
             const newUserId = crypto.randomUUID()
             const user = {
                 id: newUserId,
-                name: customerData.name,
-                email: customerData.email,
-                phone: customerData.phone || null,
-                address: customerData.address,
-                created_at: new Date().toISOString()
+                billing_address: '',
+                created_at: new Date().toISOString(),
+                email: '',
+                full_name: '',
+                phone: '',
+                role: 'student',
             }
 
-            await client.from('users').insert(user)
+            await client.from('profiles').insert(user).select()
             localStorage.setItem('userId', newUserId)
             return user
         }
@@ -133,11 +137,10 @@
                 const userId = localStorage.getItem('userId')
                 if (userId) {
                     try {
-                        const { data: user } = await client
-                            .from('users')
+                        const [user] = await client
+                            .from('profiles')
                             .select()
                             .eq('id', userId)
-                            .single()
                         
                         if (user) {
                             document.getElementById('customer-name').value = user.name || ''
