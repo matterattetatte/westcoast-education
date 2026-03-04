@@ -53,6 +53,16 @@
       "password": "mypassword",
       "role": "student",
       "created_at": "2026-03-04T13:28:32.759Z"
+    },
+    {
+      "id": "becf1386-5670-40a8-be38-ab241b8eda3f",
+      "full_name": "Matias Marti",
+      "email": "maootias@devicestamp.com",
+      "billing_address": "ul. Świeradowska 47",
+      "phone": "+46701178451",
+      "password": "o",
+      "role": "student",
+      "created_at": "2026-03-04T13:31:54.789Z"
     }
   ],
   "courses": [
@@ -116,20 +126,20 @@
       "purchased_at": "2026-03-04T13:24:38.104Z"
     },
     {
-      "id": "b3905a54-446e-41aa-adad-3925075a8c6b",
-      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "id": "fa744827-31ad-45c6-be8c-cfc3d97416b9",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
       "user_id": null,
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T13:28:32.771Z"
+      "purchased_at": "2026-03-04T13:31:54.802Z"
     },
     {
-      "id": "86f47b58-9f79-4304-a4cc-b90575be8b5f",
-      "course_id": "550e8400-e29b-41d4-a716-446655440009",
-      "user_id": null,
-      "type": "classroom",
+      "id": "5f023f54-4719-45bb-b2c6-316e1b218af0",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "becf1386-5670-40a8-be38-ab241b8eda3f",
+      "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T13:29:43.305Z"
+      "purchased_at": "2026-03-04T13:32:13.223Z"
     }
   ],
   "purchases": [
@@ -167,6 +177,20 @@
       "user_id": null,
       "price_paid": 50,
       "purchased_at": "2026-03-04T13:29:43.305Z"
+    },
+    {
+      "id": "96d3b113-da3f-485b-a5ea-08190e9ef6af",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": null,
+      "price_paid": 50,
+      "purchased_at": "2026-03-04T13:31:54.802Z"
+    },
+    {
+      "id": "9ba0dde3-d49c-4abe-b00e-a613d4d00de1",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "becf1386-5670-40a8-be38-ab241b8eda3f",
+      "price_paid": 1999,
+      "purchased_at": "2026-03-04T13:32:13.223Z"
     }
   ],
   "course_questions": [],
