@@ -16,20 +16,22 @@ import { client, Profile } from '../db.js'
 
   const [course] = await client.from('courses').select().eq('id', courseId as string)
 
-  function setText(id: string, value: string | number | undefined | null) {
-    const el = document.getElementById(id);
-    if (!el) {
-      console.warn(`Element with id "${id}" not found`);
-      return;
-    }
-
-    const text = value == null ? '' : String(value);
-
-    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-      el.value = text;
-    } else {
-      el.textContent = text;
-    }
+  function setTexts(updates: Record<string, string | number | null | undefined>) {
+    Object.entries(updates).forEach(([id, value]) => {
+      const el = document.getElementById(id);
+      if (!el) {
+        console.warn(`Element with id "${id}" not found`);
+        return;
+      }
+      
+      const text = value == null ? '' : String(value);
+      
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+        el.value = text;
+      } else {
+        el.textContent = text;
+      }
+    });
   }
 
   async function loadCourseAndUser() {
@@ -43,20 +45,23 @@ import { client, Profile } from '../db.js'
         return window.history.back()
       }
 
-      setText('course-title', `Boka: ${course.title}`);
-      setText('course-name',   course.title);
-      setText('course-type',   formatType === 'classroom' ? 'Klassrum' : 'Distans');
-      setText('course-price',  `${course.price || 0} kr`);
-
-      setText('course-format', formatType === 'classroom' ? 'Klassrum' : 'Distans')
+      setTexts({
+        'course-title': `Boka: ${course.title}`,
+        'course-name': course.title,
+        'course-type': formatType === 'classroom' ? 'Klassrum' : 'Distans',
+        'course-price': `${course.price || 0} kr`,
+        'course-format': formatType === 'classroom' ? 'Klassrum' : 'Distans'
+      });
 
       if (userId) {
         const [profile] = await client.from('profiles').select().eq('id', userId)
         if (profile) {
-          setText('name',    profile.full_name);
-          setText('email',   profile.email);
-          setText('address', profile.billing_address);
-          setText('phone',   profile.phone);
+          setTexts({
+            'name': profile.full_name,
+            'email': profile.email,
+            'address': profile.billing_address,
+            'phone': profile.phone,
+          })
         }
       }
 
