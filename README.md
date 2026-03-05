@@ -61,7 +61,6 @@ graph TD
     index.html --> admin/index
     admin/index --> admin/newcourse
     admin/index --> admin/enrollments
-    admin/enrollments --> admin/index
     
     classDef root fill:#e1f5fe,stroke:#01579b,stroke-width:3px,color:#000
     classDef admin fill:#f3e5f5,stroke:#4a148c,stroke-width:3px,color:#000
