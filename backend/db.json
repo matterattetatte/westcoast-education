@@ -265,6 +265,48 @@
       "course_number": "8989",
       "duration_days": 34,
       "price": 78
+    },
+    {
+      "id": "61bb9d14-44ce-463f-9efb-5eeb81a7a0d6",
+      "created_at": "2026-03-05T11:20:41.688Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T10:20:41.688Z",
+      "title": "kkkk",
+      "course_number": "kkkkk",
+      "duration_days": 3,
+      "price": 3
+    },
+    {
+      "id": "5bafcdf8-d9d0-41f9-a52f-c18bb38901ae",
+      "created_at": "2026-03-05T11:21:11.928Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T10:21:11.928Z",
+      "title": "kkkkooo",
+      "course_number": "kkkkk",
+      "duration_days": 3,
+      "price": 3
+    },
+    {
+      "id": "fed5165c-4273-4c3a-b834-a15e295c71dc",
+      "created_at": "2026-03-05T11:21:23.658Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T10:21:23.659Z",
+      "title": "ooo",
+      "course_number": "ooo",
+      "duration_days": 12,
+      "price": 3
     }
   ],
   "course_sessions": [
