@@ -77,7 +77,7 @@
     {
       "id": "84390800-460a-46ec-b71c-19371127cadc",
       "full_name": "Matias Marti",
-      "email": "matiasiii@devicestamp.com",
+      "email": "matiasiii@devicestamp.comooo",
       "billing_address": "ul. Świeradowska 47",
       "phone": "+46701178451",
       "password": "[[[",
@@ -121,26 +121,12 @@
       "description": "Beskrivning",
       "duration_days": 50,
       "start_date": "2028-03-04T13:09:31.558Z",
-      "type": "online",
+      "type": "",
       "price": 50,
       "image_url": "",
       "average_rating": 0,
       "rating_count": 0,
       "created_at": "2026-03-05T00:09:49.240Z"
-    },
-    {
-      "id": "550e8400-e29b-41d4-a716-336655440002",
-      "title": "Ny kurs",
-      "course_number": "HIHI101",
-      "description": "Beskrivning",
-      "duration_days": 50,
-      "start_date": "2028-03-04T13:09:31.558Z",
-      "type": "online",
-      "price": 50,
-      "image_url": "",
-      "average_rating": 0,
-      "rating_count": 0,
-      "created_at": "2026-03-05T00:10:00.589Z"
     },
     {
       "id": "8a6ba515-d5a6-4d9c-b1cb-b4584223bc94",
@@ -396,6 +382,14 @@
       "type": "classroom",
       "payment_status": "paid",
       "enrolled_at": "2026-03-05T13:03:33.095Z"
+    },
+    {
+      "id": "c35ce3d9-e8d2-468b-857d-9882b28f4e7a",
+      "course_id": "550e8400-e29b-41d4-a716-336655440002",
+      "user_id": "84390800-460a-46ec-b71c-19371127cadc",
+      "type": "classroom",
+      "payment_status": "paid",
+      "enrolled_at": "2026-03-05T13:09:09.978Z"
     }
   ],
   "purchases": [
@@ -482,6 +476,13 @@
       "user_id": "84390800-460a-46ec-b71c-19371127cadc",
       "price_paid": 50,
       "purchased_at": "2026-03-05T13:03:33.095Z"
+    },
+    {
+      "id": "bcc434c1-8cb8-4e24-a36e-b1c0a5294a29",
+      "course_id": "550e8400-e29b-41d4-a716-336655440002",
+      "user_id": "84390800-460a-46ec-b71c-19371127cadc",
+      "price_paid": 50,
+      "purchased_at": "2026-03-05T13:09:09.978Z"
     }
   ],
   "course_questions": [],
