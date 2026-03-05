@@ -69,10 +69,12 @@ graph TD
     classDef root fill:#e1f5fe,stroke:#01579b,stroke-width:3px,color:#000
     classDef admin fill:#f3e5f5,stroke:#4a148c,stroke-width:3px,color:#000
     classDef student fill:#e8f5e8,stroke:#1b5e20,stroke-width:3px,color:#000
+    classDef test   fill:#fff3e0, stroke:#e65100, stroke-width:3px, color:#000 
     
     class index.html root
     class admin/index,admin/enrollments,admin/newcourse admin
     class student/index,student/courses,student/details,student/buy student
+    class admin/new-course.spec test
 ```
 
 ## ER Diagram
