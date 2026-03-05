@@ -48,26 +48,19 @@ graph TD
 
 ## 🚀 Quick Start
 
-### Frontend
+### Frontend & Backend in one
 ```bash
-cd frontend
-./start_frontend.sh   # Development server
-./start_tsc.sh        # TypeScript compiler
+# possibly first time: chmod +x ./start_server.sh
+./start_server.sh
 ```
 
-### Backend
-```bash
-cd backend
-./start_backend.sh    # json-server
-```
-
-## 🏗️ File Structure
+## 🏗️ Frontend File Structure
 
 ```
-westcoast-education/
+public/
 ├── index.html                 # Landing page
 ├── admin/
-│   ├── index.html            # Admin dashboard
+│   ├── index.html            # Admin dashboard, list of courses
 │   ├── course-enrollments.html # Enrollment management
 │   └── new-course.html       # Course creation
 └── student/
@@ -81,10 +74,6 @@ westcoast-education/
 
 - **Dual Interface**: Separate admin & student experiences
 - **TypeScript**: Type-safe frontend with `tsc` compilation
-- **Vanilla JS**: No frameworks - pure browser APIs
+- **Vanilla TS/JS**: No frameworks (used `supabase cli` to generate db types)
 - **Responsive**: Works on all screen sizes
-- **Course Management**: Full CRUD for courses & enrollments
-
-***
-
-Would you like me to add tech stack badges or expand any specific sections?
+- **Course Management**: Partial CRUD for courses, enrollments, purchases...
