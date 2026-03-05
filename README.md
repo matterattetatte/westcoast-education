@@ -48,6 +48,7 @@ graph TD
 
     subgraph "test (admin)"
         admin/new-course.spec["🔧 admin/new-course.spec.html"]
+    end
     
     subgraph "student"
         student/index["👋 student/index.html"]
