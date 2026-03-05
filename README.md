@@ -72,6 +72,10 @@ graph TD
     class student/index,student/courses,student/details,student/buy student
 ```
 
+## ER Diagram
+
+![Alt text](dbml.svg)
+
 ## ✨ Features
 
 - **Dual Interface**: Separate admin & student experiences
