@@ -78,9 +78,13 @@ gamla applikation var inte detta och vi fick väldigt mycket kritik för detta.
 // use media queries!!
 
 ⏳ Designkrav
-Gällande design och utseende har vi inte speciella krav förutom att applikationen skall vara
-lätt att orientera sig i. Det vill säga att den skall vara lätt att förstå så man hittar de
-väsentliga sakerna enkelt. Givetvis behöver den vara tilltalande att arbeta med det vill säga
+✅ Gällande design och utseende har vi inte speciella krav förutom att applikationen skall vara
+lätt att orientera sig i. 
+
+✅ Det vill säga att den skall vara lätt att förstå så man hittar de
+väsentliga sakerna enkelt. 
+
+✅ Givetvis behöver den vara tilltalande att arbeta med det vill säga
 att den ska innehålla modern HTML och CSS.
 
 // use variables to create a theme... and reference those variables in our css classes
@@ -102,7 +106,7 @@ För godkänt krävs följande moment
 
 Väl godkänt(VG) krav
 ✅ För välgodkänt krävs förutom G kraven ovan att antingen Steg 1 eller Steg 2 är utvecklad med TypeScript
-⏳ Att minst en TypeScript modul är utvecklad enligt TDD(Test Driven Development) principen
+✅ Att minst en TypeScript modul är utvecklad enligt TDD(Test Driven Development) principen
 
 Inlämning
 
@@ -111,19 +115,19 @@ Inlämning ska ske som en GitHub länk (⏳) och som en zippad fil. Tänk på at
 
 Inlämningsuppgiften examinerar följande läranderesultat från kursplanen:
 
-felsökningstekniker och TDD
-grundläggande programmering i JavaScript med TypeScript
-tillämpning av JavaScript och blockkedjeteknik i programmering i Web3
-välja och använda tekniker och arbetsmetoder för att genomföra projekt i JavaScript
-använda TypeScript i webbutveckling
+✅ felsökningstekniker och TDD
+✅ grundläggande programmering i JavaScript med TypeScript
+?? tillämpning av JavaScript och blockkedjeteknik i programmering i Web3
+✅ välja och använda tekniker och arbetsmetoder för att genomföra projekt i JavaScript
+✅ använda TypeScript i webbutveckling
  
 VG-mål för uppgiften:
 
 Den studerande har nått samtliga lärandemål för kursen. Den studerande kan dessutom: 
 
-självständigt lösa problem med hjälp av JavaScript
-följa god programmerings-sed
-Med högre kvalitet än för betyget G. 
+✅ självständigt lösa problem med hjälp av JavaScript
+✅ följa god programmerings-sed
+✅ Med högre kvalitet än för betyget G. 
 
 
 Inlämning: 15 mars

@@ -40,7 +40,7 @@ function renderCourses(courses) {
           <article class="course-card glass-card">
             <div class="course-media">
               <img 
-                src="https://dummyimage.com/640x360/4f46e5/e0e7ff?text=${encodeURIComponent(course.title)}" 
+                src="${course.image_url || 'https://dummyimage.com/640x360/4f46e5/e0e7ff?text=' + encodeURIComponent(course.title)}" 
                 alt="${course.title}" 
                 class="course-image" 
                 loading="lazy"
