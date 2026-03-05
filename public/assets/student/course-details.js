@@ -42,11 +42,11 @@ function renderCourseDetails(course, reviews, avgRating) {
     const typeLabel = course.type === 'classroom' ? 'Klassrum' :
         course.type === 'online' ? 'Distans' : 'Både IRL och Online';
     const classroomButton = course.type === 'classroom' || course.type === undefined || !course.type ?
-        `<a href="./buy-course.html?id=${course.id}&type=classroom" class="btn btn--primary btn--block">
+        `<a href="./buy-course?id=${course.id}&type=classroom" class="btn btn--primary btn--block">
         🏫 Boka Klassrum
       </a>` : '';
     const onlineButton = course.type === 'online' || course.type === undefined || !course.type ?
-        `<a href="./buy-course.html?id=${course.id}&type=online" class="btn btn--primary btn--block">
+        `<a href="./buy-course?id=${course.id}&type=online" class="btn btn--primary btn--block">
       💻 Boka Distans
     </a>` : '';
     container.innerHTML = `

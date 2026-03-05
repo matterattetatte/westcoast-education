@@ -73,6 +73,16 @@
       "password": "o",
       "role": "student",
       "created_at": "2026-03-04T23:24:49.742Z"
+    },
+    {
+      "id": "84390800-460a-46ec-b71c-19371127cadc",
+      "full_name": "Matias Marti",
+      "email": "matiasiii@devicestamp.com",
+      "billing_address": "ul. Świeradowska 47",
+      "phone": "+46701178451",
+      "password": "[[[",
+      "role": "student",
+      "created_at": "2026-03-05T12:57:26.468Z"
     }
   ],
   "courses": [
@@ -370,6 +380,14 @@
       "type": "online",
       "payment_status": "paid",
       "enrolled_at": "2026-03-05T10:45:21.105Z"
+    },
+    {
+      "id": "a759e8d0-25fd-4faf-a5fb-af992ae35ec4",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "",
+      "type": "online",
+      "payment_status": "paid",
+      "enrolled_at": "2026-03-05T12:57:26.482Z"
     }
   ],
   "purchases": [
@@ -442,6 +460,13 @@
       "user_id": "f66b7fc7-8b3e-4a3a-8de5-c5a560c7a69a",
       "price_paid": 1999,
       "purchased_at": "2026-03-05T10:45:21.105Z"
+    },
+    {
+      "id": "27c7b671-71cb-482f-8686-065d7cc15a76",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "",
+      "price_paid": 1999,
+      "purchased_at": "2026-03-05T12:57:26.482Z"
     }
   ],
   "course_questions": [],

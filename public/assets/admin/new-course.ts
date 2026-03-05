@@ -32,5 +32,5 @@ document.getElementById('new-course-form')!.addEventListener('submit', async (e:
 
     await createCourse(course)
 
-    window.location.href = `./course-enrollments.html?id=${course.id}&title=${encodeURIComponent(course.title)}`;
+    window.location.href = `./course-enrollments?id=${course.id}&title=${encodeURIComponent(course.title)}`;
 })

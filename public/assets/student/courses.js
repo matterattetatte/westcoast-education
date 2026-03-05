@@ -63,7 +63,7 @@ function renderCourses(courses) {
                 ${((_a = course.description) === null || _a === void 0 ? void 0 : _a.substring(0, 120)) || ''}${Number((_b = course.description) === null || _b === void 0 ? void 0 : _b.length) > 120 ? '...' : ''}
               </p>
 
-              <a href="./course-details.html?id=${course.id}" class="btn btn--primary btn--block">
+              <a href="./course-details?id=${course.id}" class="btn btn--primary btn--block">
                 Boka Nu
               </a>
             </div>

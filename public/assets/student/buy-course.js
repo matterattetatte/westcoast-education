@@ -130,7 +130,7 @@ import { client } from '../db.js';
                     enrolled_at: now
                 }).select();
                 alert(`Tack ${customer.full_name}! Din bokning är nu bekräftad.`);
-                window.location.href = './courses.html?success=true';
+                window.location.href = './courses?success=true';
             }
             catch (err) {
                 console.error('Booking failed:', err);

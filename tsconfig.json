@@ -2,14 +2,14 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "ESNext",
-    "outDir": "./assets",
-    "rootDir": "./assets",
+    "outDir": "./public/assets",
+    "rootDir": "./public/assets",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2017", "dom"]
   },
-  "include": ["assets/**/*.ts"],
+  "include": ["public/assets/**/*.ts"],
   "exclude": ["node_modules"]
 }
