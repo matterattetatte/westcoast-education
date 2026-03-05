@@ -8,9 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { API_BASE } from "../db.js";
+import { createCourse } from "./new-course.js";
 const assert = (condition, message) => {
-    if (!condition)
+    if (!condition) {
         alert(message);
+        throw new Error(message);
+    }
 };
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const coursesBefore = yield fetch(`${API_BASE}/courses`).then((r) => r.json());
@@ -32,4 +35,5 @@ const assert = (condition, message) => {
     const coursesAfter = yield fetch(`${API_BASE}/courses`).then((r) => r.json());
     assert(coursesAfter.length === coursesBefore.length + 1, "A new course should have been created");
     assert(JSON.stringify(coursesAfter.slice(-1)[0]) === JSON.stringify(newCourseData), "The new course should match the data we sent");
-}));
+    alert('Test succeeded!');
+}))();

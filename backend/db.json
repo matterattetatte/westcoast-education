@@ -103,6 +103,34 @@
       "average_rating": 4.5,
       "rating_count": 10,
       "created_at": "2026-03-04T01:00:00Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-336655440002",
+      "title": "Ny kurs",
+      "course_number": "HIHI101",
+      "description": "Beskrivning",
+      "duration_days": 50,
+      "start_date": "2028-03-04T13:09:31.558Z",
+      "type": "online",
+      "price": 50,
+      "image_url": "",
+      "average_rating": 0,
+      "rating_count": 0,
+      "created_at": "2026-03-05T00:09:49.240Z"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-336655440002",
+      "title": "Ny kurs",
+      "course_number": "HIHI101",
+      "description": "Beskrivning",
+      "duration_days": 50,
+      "start_date": "2028-03-04T13:09:31.558Z",
+      "type": "online",
+      "price": 50,
+      "image_url": "",
+      "average_rating": 0,
+      "rating_count": 0,
+      "created_at": "2026-03-05T00:10:00.589Z"
     }
   ],
   "course_sessions": [
