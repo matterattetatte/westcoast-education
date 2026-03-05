@@ -96,12 +96,12 @@ import { client, Course, Profile } from '../db.js'
         const password = prompt('Please, provide password')
         if (!password) return
 
-        let userId = ''
         const [foundUser] = await client.from('profiles').select().eq('email', customer.email)
 
         if (!foundUser) {
           userId = crypto.randomUUID()
 
+          debugger
           await client.from('profiles').insert({
             id: userId,
             ...customer,

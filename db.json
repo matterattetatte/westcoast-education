@@ -83,6 +83,26 @@
       "password": "[[[",
       "role": "student",
       "created_at": "2026-03-05T12:57:26.468Z"
+    },
+    {
+      "id": "5f5bdd2c-9e49-4e27-a35b-4e309eb103b7",
+      "full_name": "super duper",
+      "email": "matias@email.com",
+      "billing_address": "ul. Świeradowska 90",
+      "phone": "+46701178457",
+      "password": "ppp",
+      "role": "student",
+      "created_at": "2026-03-05T13:38:48.484Z"
+    },
+    {
+      "id": "8046d1b3-9756-4dcd-8b3b-b07ae4481bfa",
+      "full_name": "Matias Martilllppp",
+      "email": "matias@devicestaoompll.com",
+      "billing_address": "ul. Świeradowska 47",
+      "phone": "+46701178451",
+      "password": "pp",
+      "role": "student",
+      "created_at": "2026-03-05T13:40:52.892Z"
     }
   ],
   "courses": [
@@ -418,6 +438,14 @@
       "type": "classroom",
       "payment_status": "paid",
       "enrolled_at": "2026-03-05T13:30:47.604Z"
+    },
+    {
+      "id": "bae8ff23-699a-4d67-841e-0c424dae0113",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "8046d1b3-9756-4dcd-8b3b-b07ae4481bfa",
+      "type": "online",
+      "payment_status": "paid",
+      "enrolled_at": "2026-03-05T13:41:34.784Z"
     }
   ],
   "purchases": [
@@ -511,6 +539,27 @@
       "user_id": "84390800-460a-46ec-b71c-19371127cadc",
       "price_paid": "999999999",
       "purchased_at": "2026-03-05T13:30:47.604Z"
+    },
+    {
+      "id": "5b6d6ce4-9366-4110-b756-9d46728b6872",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "",
+      "price_paid": 50,
+      "purchased_at": "2026-03-05T13:38:48.564Z"
+    },
+    {
+      "id": "e3bcc416-a07d-409a-841d-db03afc0946c",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "",
+      "price_paid": 50,
+      "purchased_at": "2026-03-05T13:40:59.803Z"
+    },
+    {
+      "id": "3e733bee-2d8c-40bf-85b2-06b237646e51",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "8046d1b3-9756-4dcd-8b3b-b07ae4481bfa",
+      "price_paid": 50,
+      "purchased_at": "2026-03-05T13:41:34.784Z"
     }
   ],
   "course_questions": [],

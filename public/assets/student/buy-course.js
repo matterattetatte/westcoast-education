@@ -96,10 +96,10 @@ import { client } from '../db.js';
                     const password = prompt('Please, provide password');
                     if (!password)
                         return;
-                    let userId = '';
                     const [foundUser] = yield client.from('profiles').select().eq('email', customer.email);
                     if (!foundUser) {
                         userId = crypto.randomUUID();
+                        debugger;
                         yield client.from('profiles').insert(Object.assign(Object.assign({ id: userId }, customer), { password, role: 'student', created_at: new Date().toISOString() })).select();
                     }
                     else {
