@@ -30,6 +30,7 @@ async function request<T = any>(endpoint: string, options: RequestInit = {}): Pr
     return response.json()
 }
 
+// supabase inspired client
 export class JsonServerClient {
     from<T extends TableName>(table: T) {
         return {
@@ -47,34 +48,33 @@ export class JsonServerClient {
 
             insert: (data: InsertRow<T> | InsertRow<T>[]) => ({
                 async select(): Promise<{ data: ExtractRow<T>[] }> {
-                    const result = await request(table, {
+                    return request(table, {
                         method: 'POST',
                         body: JSON.stringify(data)
                     })
-                    return { data: result }
                 }
             }),
 
             update: (data: Partial<ExtractRow<T>>) => ({
-                eq: async (field: string, value: string | number): Promise<{ data: ExtractRow<T>[] }> => {
+                eq: async (field: string, value: string | number): Promise<ExtractRow<T>[]> => {
                     const records = await request<ExtractRow<T>[]>(`${table}?${field}=${value}`)
-                    if (records.length === 0) return { data: [] }
+                    if (records.length === 0) return []
 
                     const response = await request(`${table}/${records[0].id}`, {
                         method: 'PATCH',
                         body: JSON.stringify(data)
                     })
-                    return { data: [response] }
+                    return [response]
                 }
             }),
 
             delete: () => ({
-                eq: async (field: string, value: string | number): Promise<{ data: null }> => {
+                eq: async (field: string, value: string | number): Promise<null> => {
                     const records = await request<ExtractRow<T>[]>(`${table}?${field}=${value}`)
                     if (records.length > 0) {
                         await request(`${table}/${records[0].id}`, { method: 'DELETE' })
                     }
-                    return { data: null }
+                    return null
                 }
             })
         }

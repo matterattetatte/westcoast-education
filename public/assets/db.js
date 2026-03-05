@@ -17,6 +17,7 @@ function request(endpoint_1) {
         return response.json();
     });
 }
+// supabase inspired client
 export class JsonServerClient {
     from(table) {
         return {
@@ -35,11 +36,10 @@ export class JsonServerClient {
             insert: (data) => ({
                 select() {
                     return __awaiter(this, void 0, void 0, function* () {
-                        const result = yield request(table, {
+                        return request(table, {
                             method: 'POST',
                             body: JSON.stringify(data)
                         });
-                        return { data: result };
                     });
                 }
             }),
@@ -47,12 +47,12 @@ export class JsonServerClient {
                 eq: (field, value) => __awaiter(this, void 0, void 0, function* () {
                     const records = yield request(`${table}?${field}=${value}`);
                     if (records.length === 0)
-                        return { data: [] };
+                        return [];
                     const response = yield request(`${table}/${records[0].id}`, {
                         method: 'PATCH',
                         body: JSON.stringify(data)
                     });
-                    return { data: [response] };
+                    return [response];
                 })
             }),
             delete: () => ({
@@ -61,7 +61,7 @@ export class JsonServerClient {
                     if (records.length > 0) {
                         yield request(`${table}/${records[0].id}`, { method: 'DELETE' });
                     }
-                    return { data: null };
+                    return null;
                 })
             })
         };
