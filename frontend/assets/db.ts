@@ -12,17 +12,15 @@ export type Subscriptions = Database['public']['Tables']['subscriptions']['Row']
 type ExtractRow<T extends TableName> = Database['public']['Tables'][T]['Row']
 type InsertRow<T extends TableName> = Database['public']['Tables'][T]['Insert']
 
-const API_BASE = 'http://localhost:3000'
+export const API_BASE = 'http://localhost:3000'
 
 type TableName =
     | 'profiles' | 'courses' | 'course_sessions' | 'enrollments'
     | 'purchases' | 'course_questions' | 'course_reviews' | 'subscriptions'
 
-const baseUrl: string = API_BASE
-
 
 async function request<T = any>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const url = `${baseUrl}/${endpoint}`
+    const url = `${API_BASE}/${endpoint}`
     const response = await fetch(url, {
         headers: { 'Content-Type': 'application/json', ...options.headers },
         ...options

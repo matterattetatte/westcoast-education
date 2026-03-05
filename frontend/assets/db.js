@@ -7,11 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const API_BASE = 'http://localhost:3000';
-const baseUrl = API_BASE;
+export const API_BASE = 'http://localhost:3000';
 function request(endpoint_1) {
     return __awaiter(this, arguments, void 0, function* (endpoint, options = {}) {
-        const url = `${baseUrl}/${endpoint}`;
+        const url = `${API_BASE}/${endpoint}`;
         const response = yield fetch(url, Object.assign({ headers: Object.assign({ 'Content-Type': 'application/json' }, options.headers) }, options));
         if (!response.ok)
             throw new Error(`HTTP ${response.status}`);
