@@ -13,12 +13,17 @@ function loadCourses() {
     return __awaiter(this, void 0, void 0, function* () {
         const courses = yield client.from('courses').select().execute();
         const reviews = yield client.from('course_reviews').select().execute();
+        const userId = localStorage.getItem('userId');
+        const enrollments = userId ? yield client.from('enrollments').select().eq('user_id', userId) : [];
+        const enrolledCourseIds = enrollments.map(e => e.course_id);
         const allCourses = courses.map(course => {
             const courseReviews = reviews.filter(r => r.course_id === course.id);
             const reviewCount = courseReviews.length;
             const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4;
+            const isAleadyEnrolled = enrolledCourseIds.includes(course.id);
             return Object.assign(Object.assign({}, course), { popularityScore,
-                reviewCount });
+                reviewCount,
+                isAleadyEnrolled });
         });
         // Sort by popularity (highest first)
         allCourses.sort((a, b) => b.popularityScore - a.popularityScore);
@@ -63,9 +68,12 @@ function renderCourses(courses) {
                 ${((_a = course.description) === null || _a === void 0 ? void 0 : _a.substring(0, 120)) || ''}${Number((_b = course.description) === null || _b === void 0 ? void 0 : _b.length) > 120 ? '...' : ''}
               </p>
 
-              <a href="./course-details?id=${course.id}" class="btn btn--primary btn--block">
+              ${course.isAleadyEnrolled ?
+            '<div class="btn btn--primary btn--block">Redan registrerad</div>'
+            :
+                `<a href="./course-details?id=${course.id}" class="btn btn--primary btn--block">
                 Boka Nu
-              </a>
+              </a>`}
             </div>
           </article>
         `;

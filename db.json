@@ -388,6 +388,14 @@
       "type": "online",
       "payment_status": "paid",
       "enrolled_at": "2026-03-05T12:57:26.482Z"
+    },
+    {
+      "id": "030f0758-4fbf-4231-80bf-f8b4282c1ca1",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "84390800-460a-46ec-b71c-19371127cadc",
+      "type": "classroom",
+      "payment_status": "paid",
+      "enrolled_at": "2026-03-05T13:03:33.095Z"
     }
   ],
   "purchases": [
@@ -467,6 +475,13 @@
       "user_id": "",
       "price_paid": 1999,
       "purchased_at": "2026-03-05T12:57:26.482Z"
+    },
+    {
+      "id": "ece89f68-cc03-46c1-b846-2b7c1f1f62a3",
+      "course_id": "550e8400-e29b-41d4-a716-446655440009",
+      "user_id": "84390800-460a-46ec-b71c-19371127cadc",
+      "price_paid": 50,
+      "purchased_at": "2026-03-05T13:03:33.095Z"
     }
   ],
   "course_questions": [],

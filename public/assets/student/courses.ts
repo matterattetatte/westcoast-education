@@ -4,16 +4,21 @@ import { createStars } from '../common.js';
 async function loadCourses() {
     const courses = await client.from('courses').select().execute();
     const reviews = await client.from('course_reviews').select().execute();
+    const userId = localStorage.getItem('userId')
+    const enrollments = userId ? await client.from('enrollments').select().eq('user_id', userId) : []
+    const enrolledCourseIds = enrollments.map(e => e.course_id)
 
     const allCourses = courses.map(course => {
         const courseReviews = reviews.filter(r => r.course_id === course.id);
         const reviewCount = courseReviews.length;
         const popularityScore = (course.rating_count || 0) * 0.6 + reviewCount * 0.4;
+        const isAleadyEnrolled = enrolledCourseIds.includes(course.id)
 
         return {
             ...course,
             popularityScore,
             reviewCount,
+            isAleadyEnrolled,
         };
     });
 
@@ -23,7 +28,7 @@ async function loadCourses() {
     renderCourses(allCourses.slice(0, 10));
 }
 
-function renderCourses(courses: Course[]) {
+function renderCourses(courses: (Course & { isAleadyEnrolled: boolean })[]) {
     const grid = document.getElementById('courses-grid')!
 
     const courseMapping = {
@@ -63,9 +68,12 @@ function renderCourses(courses: Course[]) {
                 ${course.description?.substring(0, 120) || ''}${Number(course.description?.length) > 120 ? '...' : ''}
               </p>
 
-              <a href="./course-details?id=${course.id}" class="btn btn--primary btn--block">
+              ${course.isAleadyEnrolled ?
+                '<div class="btn btn--primary btn--block">Redan registrerad</div>'
+                :
+              `<a href="./course-details?id=${course.id}" class="btn btn--primary btn--block">
                 Boka Nu
-              </a>
+              </a>`}
             </div>
           </article>
         `;
