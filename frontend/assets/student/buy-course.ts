@@ -1,10 +1,10 @@
 import { extractFormData } from '../common.js'
-import { client, Profile } from '../db.js'
+import { client, Course, Profile } from '../db.js'
 
 (async () => {
   const urlParams = new URLSearchParams(window.location.search)
   const courseId = urlParams.get('id')
-  const formatType = urlParams.get('type') as 'classroom' | 'online'
+  const formatType = urlParams.get('type') as Course['type']
 
   if (!courseId) {
     document.body.innerHTML = '<div class="error-message">❌ Ingen kurs vald</div>'
@@ -45,12 +45,13 @@ import { client, Profile } from '../db.js'
         return window.history.back()
       }
 
+      const courseFormat = formatType === 'classroom' ? 'Klassrum' : 'Distans'
       setTexts({
         'course-title': `Boka: ${course.title}`,
         'course-name': course.title,
-        'course-type': formatType === 'classroom' ? 'Klassrum' : 'Distans',
+        'course-type': courseFormat,
         'course-price': `${course.price || 0} kr`,
-        'course-format': formatType === 'classroom' ? 'Klassrum' : 'Distans'
+        'course-format': courseFormat,
       });
 
       if (userId) {
@@ -136,8 +137,8 @@ import { client, Profile } from '../db.js'
         course_id: courseId,
         user_id: userId,
         type: formatType || '',
-        payment_status: 'paid',           // TODO: egentligen efter betalning
-        purchased_at: now
+        payment_status: 'paid',
+        enrolled_at: now
       }).select()
 
       alert(`Tack ${customer.full_name}! Din bokning är nu bekräftad.`)

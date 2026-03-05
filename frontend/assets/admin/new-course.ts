@@ -15,7 +15,7 @@ document.getElementById('new-course-form')!.addEventListener('submit', async (e:
       title: 'title',
       course_number: 'number',
       duration_days: 'days',
-      price: 'cost',
+      price: 'price',
     })
 
     const course = {

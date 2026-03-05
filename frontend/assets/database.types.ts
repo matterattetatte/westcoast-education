@@ -240,7 +240,6 @@ export type Database = {
           type: 'classroom' | 'online' | ''
           is_subscription: boolean | null
           payment_status: string | null
-          purchased_at: string
           status: string | null
           user_id: string
         }
@@ -250,7 +249,6 @@ export type Database = {
           enrolled_at?: string | null
           id?: string
           type?: 'classroom' | 'online' | ''
-          purchased_at: string
           is_subscription?: boolean | null
           payment_status?: string | null
           status?: string | null
@@ -264,7 +262,6 @@ export type Database = {
           type: 'classroom' | 'online' | ''
           is_subscription?: boolean | null
           payment_status?: string | null
-          purchased_at?: string
           status?: string | null
           user_id?: string
         }

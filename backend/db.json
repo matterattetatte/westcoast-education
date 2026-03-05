@@ -251,6 +251,20 @@
       "course_number": "89898",
       "duration_days": 89,
       "price": 8989
+    },
+    {
+      "id": "85b846ea-08f0-47ef-9c64-5d25c1d160e7",
+      "created_at": "2026-03-05T10:50:20.457Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:50:20.457Z",
+      "title": "new course",
+      "course_number": "8989",
+      "duration_days": 34,
+      "price": 78
     }
   ],
   "course_sessions": [
@@ -273,7 +287,7 @@
       "user_id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T12:46:20.908Z"
+      "enrolled_at": "2026-03-04T12:46:20.908Z"
     },
     {
       "id": "9ca59ea7-dcf9-4214-a2bf-ae8b2bf6bb6d",
@@ -281,7 +295,7 @@
       "user_id": "067b3c2a-c8fc-4f8f-9b30-671ff2541d22",
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T13:24:38.104Z"
+      "enrolled_at": "2026-03-04T13:24:38.104Z"
     },
     {
       "id": "fa744827-31ad-45c6-be8c-cfc3d97416b9",
@@ -289,7 +303,7 @@
       "user_id": null,
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T13:31:54.802Z"
+      "enrolled_at": "2026-03-04T13:31:54.802Z"
     },
     {
       "id": "5f023f54-4719-45bb-b2c6-316e1b218af0",
@@ -297,7 +311,7 @@
       "user_id": "becf1386-5670-40a8-be38-ab241b8eda3f",
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T13:32:13.223Z"
+      "enrolled_at": "2026-03-04T13:32:13.223Z"
     },
     {
       "id": "ffa1bf03-385d-4b81-8c51-bfd164094d90",
@@ -305,15 +319,7 @@
       "user_id": "becf1386-5670-40a8-be38-ab241b8eda3f",
       "type": "classroom",
       "payment_status": "paid",
-      "purchased_at": "2026-03-04T22:42:14.867Z"
-    },
-    {
-      "id": "94746582-83aa-4767-a472-15db872edd64",
-      "course_id": "550e8400-e29b-41d4-a716-446655440002",
-      "user_id": "",
-      "type": "online",
-      "payment_status": "paid",
-      "purchased_at": "2026-03-04T23:24:49.751Z"
+      "enrolled_at": "2026-03-04T22:42:14.867Z"
     },
     {
       "id": "e366a799-4f5b-4f0c-99f2-78dcece8c8eb",
@@ -321,7 +327,7 @@
       "user_id": "f66b7fc7-8b3e-4a3a-8de5-c5a560c7a69a",
       "type": "online",
       "payment_status": "paid",
-      "purchased_at": "2026-03-05T10:45:21.105Z"
+      "enrolled_at": "2026-03-05T10:45:21.105Z"
     }
   ],
   "purchases": [

@@ -57,27 +57,29 @@ modernt sätt.
 Steg 2.
 
 ⏳ Administrationsverktyg
-Vi behöver en applikation som ger oss tillgång till att lägga till nya kurser. När vi lägger till
-nya kurser så behöver vi ange följande information:
-• Kurstitel
-• Kursnummer
-• Antal dagar som kursen är
-• Kostnad för kursen
 
-⏳ Dessutom behöver vi tillgång till att kunna lista vilka kunder som har bokat sig på respektive
+✅Vi behöver en applikation som ger oss tillgång till att lägga till nya kurser.
+ När vi lägger till
+nya kurser så behöver vi ange följande information:
+✅• Kurstitel
+✅• Kursnummer
+✅• Antal dagar som kursen är
+✅• Kostnad för kursen
+
+✅ Dessutom behöver vi tillgång till att kunna lista vilka kunder som har bokat sig på respektive
 kurs 
 
 // (enrollments), hehe
 
 
-⏳ Funktionskrav
+✅ Funktionskrav
 Vi vill att applikationen skall fungera i alla moderna webbläsare och gå att använda i olika
 skärmstorlekar och i olika enheter. Det är jätteviktigt att applikationen är responsiv, vår
 gamla applikation var inte detta och vi fick väldigt mycket kritik för detta.
 
 // use media queries!!
 
-⏳ Designkrav
+✅ Designkrav
 ✅ Gällande design och utseende har vi inte speciella krav förutom att applikationen skall vara
 lätt att orientera sig i. 
 
@@ -98,7 +100,7 @@ att den ska innehålla modern HTML och CSS.
 Godkänt(G) krav
 För godkänt krävs följande moment
 
-⏳  Steg 1 och Steg 2 ska vara genomförda i kravspecifikation som är bifogad.
+✅  Steg 1 och Steg 2 ska vara genomförda i kravspecifikation som är bifogad.
 ✅  Applikationen ska vara utvecklad med “Vanilla” JavaScript.
 ✅  ES6 moduler ska användas
 ✅  Json-Server ska användas som REST API
@@ -107,6 +109,8 @@ För godkänt krävs följande moment
 Väl godkänt(VG) krav
 ✅ För välgodkänt krävs förutom G kraven ovan att antingen Steg 1 eller Steg 2 är utvecklad med TypeScript
 ✅ Att minst en TypeScript modul är utvecklad enligt TDD(Test Driven Development) principen
+
+
 
 Inlämning
 

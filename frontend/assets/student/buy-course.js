@@ -48,12 +48,13 @@ import { client } from '../db.js';
                     alert('Redan inbokad!');
                     return window.history.back();
                 }
+                const courseFormat = formatType === 'classroom' ? 'Klassrum' : 'Distans';
                 setTexts({
                     'course-title': `Boka: ${course.title}`,
                     'course-name': course.title,
-                    'course-type': formatType === 'classroom' ? 'Klassrum' : 'Distans',
+                    'course-type': courseFormat,
                     'course-price': `${course.price || 0} kr`,
-                    'course-format': formatType === 'classroom' ? 'Klassrum' : 'Distans'
+                    'course-format': courseFormat,
                 });
                 if (userId) {
                     const [profile] = yield client.from('profiles').select().eq('id', userId);
@@ -125,8 +126,8 @@ import { client } from '../db.js';
                     course_id: courseId,
                     user_id: userId,
                     type: formatType || '',
-                    payment_status: 'paid', // TODO: egentligen efter betalning
-                    purchased_at: now
+                    payment_status: 'paid',
+                    enrolled_at: now
                 }).select();
                 alert(`Tack ${customer.full_name}! Din bokning är nu bekräftad.`);
                 window.location.href = './courses.html?success=true';

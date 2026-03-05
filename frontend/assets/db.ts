@@ -2,8 +2,8 @@ import { Database } from "./database.types.js"
 
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Course = Database['public']['Tables']['courses']['Row']
-export type CourseSessions = Database['public']['Tables']['course_sessions']['Row']
-export type Enrollments = Database['public']['Tables']['enrollments']['Row']
+export type CourseSession = Database['public']['Tables']['course_sessions']['Row']
+export type Enrollment = Database['public']['Tables']['enrollments']['Row']
 export type Purchases = Database['public']['Tables']['purchases']['Row']
 export type CourseQuestions = Database['public']['Tables']['course_questions']['Row']
 export type CourseReviews = Database['public']['Tables']['course_reviews']['Row']

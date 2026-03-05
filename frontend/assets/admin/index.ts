@@ -9,18 +9,12 @@ async function loadCourses() {
 function renderCourses(courses: Course[]) {
     const grid = document.getElementById('courses-grid')!
 
-    const courseMapping = {
-        classroom: 'Klassrum',
-        online: 'Distans',
-        '': '', //silence ts error
-    };
-
     grid.innerHTML = courses.map(course => {
         return `
           <article class="course-card glass-card">
             <div class="course-body">
               <h3 class="course-title">${course.title}</h3>
-              <a href="./course-enrollments.html?id=${course.id}" class="btn btn--primary btn--block">
+              <a href="./course-enrollments.html?id=${course.id}&title=${course.title}" class="btn btn--primary btn--block">
                 Se elever
               </a>
             </div>

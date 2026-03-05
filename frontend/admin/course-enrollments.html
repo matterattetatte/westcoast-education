@@ -1,2 +1,31 @@
-we will find all students that enrolled here!!
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurselever</title>
+  <link rel="stylesheet" href="../assets/index.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-nav">
+        <a href="./index.html" class="back-link" aria-label="Tillbaka till kurser">
+          ← Tillbaka
+        </a>
+        <h1 id="course-title" class="hero-title">Kurselever</h1>
+      </div>
+    </div>
+  </header>
 
+  <main class="section">
+    <div class="container">
+      <div class="courses-grid" id="enrollments-grid">
+        <div class="loading">Laddar elever...</div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../assets/admin/course-enrollments.js"></script>
+</body>
+</html>
