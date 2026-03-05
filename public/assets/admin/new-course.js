@@ -25,5 +25,5 @@ document.getElementById('new-course-form').addEventListener('submit', (e) => __a
     });
     const course = Object.assign({ id: crypto.randomUUID(), created_at: new Date().toISOString(), average_rating: 0, description: '', image_url: '', rating_count: 0, type: '', start_date: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString() }, formData);
     yield createCourse(course);
-    window.location.href = `./course-enrollments?id=${course.id}&title=${encodeURIComponent(course.title)}`;
+    window.location.href = `/admin/course-enrollments?id=${course.id}&title=${encodeURIComponent(course.title)}`;
 }));

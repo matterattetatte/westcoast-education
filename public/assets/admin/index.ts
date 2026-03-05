@@ -14,7 +14,7 @@ function renderCourses(courses: Course[]) {
           <article class="course-card glass-card">
             <div class="course-body">
               <h3 class="course-title">${course.title}</h3>
-              <a href="./course-enrollments?id=${course.id}&title=${encodeURIComponent(course.title)}" class="btn btn--primary btn--block">
+              <a href="/admin/course-enrollments?id=${course.id}&title=${encodeURIComponent(course.title)}" class="btn btn--primary btn--block">
                 Se elever
               </a>
             </div>

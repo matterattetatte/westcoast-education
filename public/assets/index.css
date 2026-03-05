@@ -52,6 +52,9 @@ body {
 
 /* Mobile → tablet */
 @media (min-width: 640px) {
+  button[type="submit"] {
+    width: 30%;
+  }
   .container {
     max-width: 640px;
     padding-inline: 1.5rem;
