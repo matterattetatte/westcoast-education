@@ -11,7 +11,7 @@ import { client } from '../../assets/db.js';
 function loadCourses() {
     return __awaiter(this, void 0, void 0, function* () {
         const courses = yield client.from('courses').select().execute();
-        renderCourses(courses.slice(0, 10));
+        renderCourses(courses);
     });
 }
 function renderCourses(courses) {

@@ -1,4 +1,5 @@
-import { client } from '../db.js'
+import { extractFormData } from '../common.js'
+import { client, Profile } from '../db.js'
 
 (async () => {
   const urlParams = new URLSearchParams(window.location.search)
@@ -52,10 +53,10 @@ import { client } from '../db.js'
       if (userId) {
         const [profile] = await client.from('profiles').select().eq('id', userId)
         if (profile) {
-          setText('customer-name',    profile.full_name);
-          setText('customer-email',   profile.email);
-          setText('customer-address', profile.billing_address);
-          setText('customer-phone',   profile.phone);
+          setText('name',    profile.full_name);
+          setText('email',   profile.email);
+          setText('address', profile.billing_address);
+          setText('phone',   profile.phone);
         }
       }
 
@@ -67,14 +68,13 @@ import { client } from '../db.js'
 
   async function handleBooking(e: SubmitEvent) {
     e.preventDefault()
-
-    const formData = new FormData(e.target as HTMLFormElement)
-    const customer = {
-      full_name: (formData.get('name') as string)?.trim(),
-      email: (formData.get('email') as string)?.trim(),
-      billing_address: (formData.get('address') as string)?.trim(),
-      phone: (formData.get('phone') as string)?.trim() || null,
-    }
+      
+    const customer = extractFormData(e.target as HTMLFormElement, {
+      full_name: 'name',
+      email: 'email', 
+      billing_address: 'address',
+      phone: 'phone',
+    }) as Omit<Profile, 'id'>
 
     if (!customer.full_name || !customer.email || !customer.billing_address) {
       alert('Vänligen fyll i alla obligatoriska fält')

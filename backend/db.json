@@ -181,6 +181,76 @@
       "course_number": "oo",
       "duration_days": 4,
       "price": 9
+    },
+    {
+      "id": "047fae77-f198-476a-af64-0964e622d9db",
+      "created_at": "2026-03-05T10:29:04.746Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:29:04.746Z",
+      "title": "qqqq",
+      "course_number": "qqqq3333",
+      "duration_days": "90",
+      "price": "999999999"
+    },
+    {
+      "id": "32c7382a-295d-40c0-9b37-136da4b4b83f",
+      "created_at": "2026-03-05T10:31:10.851Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:31:10.851Z",
+      "title": "foo",
+      "course_number": "loo",
+      "duration_days": "3",
+      "price": "90"
+    },
+    {
+      "id": "8ff8b0e3-fd7f-4e0e-b527-e8e2a9c446ef",
+      "created_at": "2026-03-05T10:34:02.660Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:34:02.660Z",
+      "title": "ppp",
+      "course_number": "ppp",
+      "duration_days": 9,
+      "price": 90
+    },
+    {
+      "id": "939daf3b-0e26-4641-af66-cb3ca636a459",
+      "created_at": "2026-03-05T10:34:24.588Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:34:24.588Z",
+      "title": "qqqqqwww",
+      "course_number": "www",
+      "duration_days": 67,
+      "price": 67
+    },
+    {
+      "id": "ef58c404-1eda-4db3-bef9-2cbed15fdde9",
+      "created_at": "2026-03-05T10:34:47.293Z",
+      "average_rating": 0,
+      "description": "",
+      "image_url": "",
+      "rating_count": 0,
+      "type": "",
+      "start_date": "2026-04-05T09:34:47.293Z",
+      "title": "898989",
+      "course_number": "89898",
+      "duration_days": 89,
+      "price": 8989
     }
   ],
   "course_sessions": [
@@ -244,6 +314,14 @@
       "type": "online",
       "payment_status": "paid",
       "purchased_at": "2026-03-04T23:24:49.751Z"
+    },
+    {
+      "id": "e366a799-4f5b-4f0c-99f2-78dcece8c8eb",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "f66b7fc7-8b3e-4a3a-8de5-c5a560c7a69a",
+      "type": "online",
+      "payment_status": "paid",
+      "purchased_at": "2026-03-05T10:45:21.105Z"
     }
   ],
   "purchases": [
@@ -309,6 +387,13 @@
       "user_id": "",
       "price_paid": 1999,
       "purchased_at": "2026-03-04T23:24:49.751Z"
+    },
+    {
+      "id": "f2073f60-89c2-4ef0-91a0-5e9b11fcee3a",
+      "course_id": "550e8400-e29b-41d4-a716-446655440002",
+      "user_id": "f66b7fc7-8b3e-4a3a-8de5-c5a560c7a69a",
+      "price_paid": 1999,
+      "purchased_at": "2026-03-05T10:45:21.105Z"
     }
   ],
   "course_questions": [],

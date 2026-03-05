@@ -3,7 +3,7 @@ import { client, Course } from '../../assets/db.js';
 async function loadCourses() {
     const courses = await client.from('courses').select().execute();
 
-    renderCourses(courses.slice(0, 10));
+    renderCourses(courses);
 }
 
 function renderCourses(courses: Course[]) {

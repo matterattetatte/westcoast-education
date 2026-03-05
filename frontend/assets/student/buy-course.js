@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { extractFormData } from '../common.js';
 import { client } from '../db.js';
 (() => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -53,10 +54,10 @@ import { client } from '../db.js';
                 if (userId) {
                     const [profile] = yield client.from('profiles').select().eq('id', userId);
                     if (profile) {
-                        setText('customer-name', profile.full_name);
-                        setText('customer-email', profile.email);
-                        setText('customer-address', profile.billing_address);
-                        setText('customer-phone', profile.phone);
+                        setText('name', profile.full_name);
+                        setText('email', profile.email);
+                        setText('address', profile.billing_address);
+                        setText('phone', profile.phone);
                     }
                 }
             }
@@ -68,15 +69,13 @@ import { client } from '../db.js';
     }
     function handleBooking(e) {
         return __awaiter(this, void 0, void 0, function* () {
-            var _a, _b, _c, _d;
             e.preventDefault();
-            const formData = new FormData(e.target);
-            const customer = {
-                full_name: (_a = formData.get('name')) === null || _a === void 0 ? void 0 : _a.trim(),
-                email: (_b = formData.get('email')) === null || _b === void 0 ? void 0 : _b.trim(),
-                billing_address: (_c = formData.get('address')) === null || _c === void 0 ? void 0 : _c.trim(),
-                phone: ((_d = formData.get('phone')) === null || _d === void 0 ? void 0 : _d.trim()) || null,
-            };
+            const customer = extractFormData(e.target, {
+                full_name: 'name',
+                email: 'email',
+                billing_address: 'address',
+                phone: 'phone',
+            });
             if (!customer.full_name || !customer.email || !customer.billing_address) {
                 alert('Vänligen fyll i alla obligatoriska fält');
                 return;

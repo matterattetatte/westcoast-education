@@ -5,3 +5,18 @@ export function createStars(rating) {
         </svg>
       `).join('');
 }
+export function extractFormData(form, fieldMap) {
+    const formData = new FormData(form);
+    const result = {};
+    Object.entries(fieldMap).forEach(([key, fieldId]) => {
+        const input = form.querySelector(`#${fieldId}`);
+        const value = formData.get(fieldId);
+        if ((input === null || input === void 0 ? void 0 : input.type) === 'number') {
+            result[key] = Number(value === null || value === void 0 ? void 0 : value.trim());
+        }
+        else {
+            result[key] = value === null || value === void 0 ? void 0 : value.trim();
+        }
+    });
+    return result;
+}
