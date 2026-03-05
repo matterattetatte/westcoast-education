@@ -1,7 +1,10 @@
 # westcoast-education
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![json-server](https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff)](https://github.com/typicode/json-server)
+[![tsc](https://img.shields.io/badge/tsc-TypeScript_Compiler-000000?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
 
 ```mermaid
-
 graph TD
     subgraph "root"
         index.html["🏠 index.html"]
@@ -39,4 +42,49 @@ graph TD
     class student/index,student/courses,student/details,student/buy student
 ```
 
-test
+## 🎓 Project Overview
+
+**westcoast-education** is a vanilla TypeScript + HTML/CSS education platform with separate admin and student interfaces. Students can browse courses, view details, and purchase while admins manage courses and track enrollments.
+
+## 🚀 Quick Start
+
+### Frontend
+```bash
+cd frontend
+./start_frontend.sh   # Development server
+./start_tsc.sh        # TypeScript compiler
+```
+
+### Backend
+```bash
+cd backend
+./start_backend.sh    # json-server
+```
+
+## 🏗️ File Structure
+
+```
+westcoast-education/
+├── index.html                 # Landing page
+├── admin/
+│   ├── index.html            # Admin dashboard
+│   ├── course-enrollments.html # Enrollment management
+│   └── new-course.html       # Course creation
+└── student/
+    ├── index.html            # Student dashboard
+    ├── courses.html          # Course catalog
+    ├── course-details.html   # Course details
+    └── buy-course.html       # Purchase flow
+```
+
+## ✨ Features
+
+- **Dual Interface**: Separate admin & student experiences
+- **TypeScript**: Type-safe frontend with `tsc` compilation
+- **Vanilla JS**: No frameworks - pure browser APIs
+- **Responsive**: Works on all screen sizes
+- **Course Management**: Full CRUD for courses & enrollments
+
+***
+
+Would you like me to add tech stack badges or expand any specific sections?
