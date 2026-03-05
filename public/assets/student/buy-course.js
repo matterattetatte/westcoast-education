@@ -12,7 +12,7 @@ import { client } from '../db.js';
 (() => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const urlParams = new URLSearchParams(window.location.search);
-    const courseId = urlParams.get('id');
+    const courseId = urlParams.get('id') || '';
     const formatType = urlParams.get('type');
     if (!courseId) {
         document.body.innerHTML = '<div class="error-message">❌ Ingen kurs vald</div>';

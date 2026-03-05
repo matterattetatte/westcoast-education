@@ -10,26 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { createStars } from '../common.js';
 import { client } from '../db.js';
 const urlParams = new URLSearchParams(window.location.search);
-const courseId = urlParams.get('id');
+const courseId = urlParams.get('id') || '';
 if (!courseId) {
     document.querySelector('.loading').innerHTML = '❌ Ingen kurs vald';
 }
 function loadCourseDetails() {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a;
         try {
-            const courses = yield client.from('courses').select().execute();
-            const reviews = yield client.from('course_reviews').select().execute();
-            const course = courses === null || courses === void 0 ? void 0 : courses.find(c => c.id === courseId);
+            const [course] = yield client.from('courses').select().eq('id', courseId);
+            const reviews = yield client.from('course_reviews').select().eq('course_id', courseId);
             if (!course) {
                 document.querySelector('.loading').innerHTML = '❌ Kurs hittades inte';
                 return;
             }
-            const courseReviews = (_a = reviews === null || reviews === void 0 ? void 0 : reviews.filter(r => r.course_id === courseId)) !== null && _a !== void 0 ? _a : [];
             const avgRating = course.average_rating ||
-                (courseReviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(courseReviews.length, 1)) || 0;
+                (reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(reviews.length, 1)) || 0;
             document.getElementById('course-title').textContent = course.title;
-            renderCourseDetails(course, courseReviews, avgRating);
+            renderCourseDetails(course, reviews, avgRating);
         }
         catch (error) {
             console.error('Error:', error);

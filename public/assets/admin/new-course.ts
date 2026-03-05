@@ -8,7 +8,7 @@ export async function createCourse(course: Course) {
 }
 
 
-document.getElementById('new-course-form')!.addEventListener('submit', async (e: SubmitEvent) => {
+document.getElementById('new-course-form')?.addEventListener('submit', async (e: SubmitEvent) => {
     e.preventDefault()
 
     const formData = extractFormData(e.target as HTMLFormElement, {

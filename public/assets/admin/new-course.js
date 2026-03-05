@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var _a;
 import { extractFormData } from "../common.js";
 import { client } from "../db.js";
 // export only for test
@@ -15,7 +16,7 @@ export function createCourse(course) {
         yield client.from('courses').insert(course).select();
     });
 }
-document.getElementById('new-course-form').addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
+(_a = document.getElementById('new-course-form')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
     const formData = extractFormData(e.target, {
         title: 'title',

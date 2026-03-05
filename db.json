@@ -365,6 +365,20 @@
       "course_number": "js1234",
       "duration_days": 4,
       "price": 5
+    },
+    {
+      "id": "5258dc53-bd4e-49e1-9dad-722a39d53258",
+      "title": "Ny kurs + 0.20714514779431248",
+      "course_number": "HIHI-${num}",
+      "description": "MY descr",
+      "duration_days": 50,
+      "start_date": "2028-03-04T13:09:31.558Z",
+      "type": "online",
+      "price": 50,
+      "image_url": "",
+      "average_rating": 0,
+      "rating_count": 0,
+      "created_at": "2026-03-05T14:16:04.936Z"
     }
   ],
   "course_sessions": [

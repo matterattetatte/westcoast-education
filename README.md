@@ -45,6 +45,9 @@ graph TD
         admin/enrollments["📊 admin/course-enrollments.html"]
         admin/newcourse["➕ admin/new-course.html"]
     end
+
+    subgraph "test (admin)"
+        admin/new-course.spec["🔧 admin/new-course.spec.html"]
     
     subgraph "student"
         student/index["👋 student/index.html"]

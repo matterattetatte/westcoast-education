@@ -11,14 +11,15 @@ const assert = (condition: boolean, message: string) => {
 (async () => {
     const coursesBefore = await fetch(`${API_BASE}/courses`).then((r) => r.json())
 
+    const num = Math.random()
     const newCourseData =  {
-      "id": "550e8400-e29b-41d4-a716-336655440002",
-      "title": "Ny kurs",
-      "course_number": "HIHI101",
-      "description": "Beskrivning",
+      "id": crypto.randomUUID(),
+      "title": `Ny kurs + ${num}`,
+      "course_number": "HIHI-${num}",
+      "description": "MY descr",
       "duration_days": 50,
       "start_date": "2028-03-04T13:09:31.558Z",
-      "type": "online" as 'online',
+      "type": "online" as 'online', //ts workaround
       "price": 50,
       "image_url": "",
       "average_rating": 0,

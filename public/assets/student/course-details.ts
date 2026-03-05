@@ -2,7 +2,7 @@ import { createStars } from '../common.js'
 import { client, Course, CourseReviews } from '../db.js'
 
 const urlParams = new URLSearchParams(window.location.search)
-const courseId = urlParams.get('id')
+const courseId = urlParams.get('id') || ''
 
 if (!courseId) {
   document.querySelector('.loading')!.innerHTML = '❌ Ingen kurs vald'
@@ -10,21 +10,19 @@ if (!courseId) {
 
 async function loadCourseDetails() {
   try {
-    const courses = await client.from('courses').select().execute()
-    const reviews = await client.from('course_reviews').select().execute()
+    const [course] = await client.from('courses').select().eq('id', courseId)
+    const reviews = await client.from('course_reviews').select().eq('course_id', courseId)
 
-    const course = courses?.find(c => c.id === courseId)
     if (!course) {
       document.querySelector('.loading')!.innerHTML = '❌ Kurs hittades inte'
       return
     }
 
-    const courseReviews = reviews?.filter(r => r.course_id === courseId) ?? []
     const avgRating = course.average_rating || 
-      (courseReviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(courseReviews.length, 1)) || 0
+      (reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / Math.max(reviews.length, 1)) || 0
 
     document.getElementById('course-title')!.textContent = course.title
-    renderCourseDetails(course, courseReviews, avgRating)
+    renderCourseDetails(course, reviews, avgRating)
 
   } catch (error) {
     console.error('Error:', error)

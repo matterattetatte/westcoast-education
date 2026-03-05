@@ -3,7 +3,7 @@ import { client, Course, Profile } from '../db.js'
 
 (async () => {
   const urlParams = new URLSearchParams(window.location.search)
-  const courseId = urlParams.get('id')
+  const courseId = urlParams.get('id') || ''
   const formatType = urlParams.get('type') as Course['type']
 
   if (!courseId) {
@@ -14,7 +14,7 @@ import { client, Course, Profile } from '../db.js'
     document.body.innerHTML = '<div class="error-message">❌ Ingen typ vald</div>'
   }
 
-  const [course] = await client.from('courses').select().eq('id', courseId as string)
+  const [course] = await client.from('courses').select().eq('id', courseId)
 
   function setTexts(updates: Record<string, string | number | null | undefined>) {
     Object.entries(updates).forEach(([id, value]) => {
