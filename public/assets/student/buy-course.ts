@@ -101,7 +101,6 @@ import { client, Course, Profile } from '../db.js'
         if (!foundUser) {
           userId = crypto.randomUUID()
 
-          debugger
           await client.from('profiles').insert({
             id: userId,
             ...customer,

@@ -47,7 +47,7 @@ export class JsonServerClient {
             }),
 
             insert: (data: InsertRow<T> | InsertRow<T>[]) => ({
-                async select(): Promise<{ data: ExtractRow<T>[] }> {
+                async select(): Promise<ExtractRow<T>[]> {
                     return request(table, {
                         method: 'POST',
                         body: JSON.stringify(data)
